@@ -16,5 +16,5 @@ type Template struct {
 type Resources map[string]Resource
 
 type Resource struct {
-	Metadata map[string]interface{} `json:"Metadata,omitempty"`
+	Metadata map[string]string `json:"Metadata,omitempty"`
 }

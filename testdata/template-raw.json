@@ -1,0 +1,9 @@
+{
+  "Resources": {
+    "MyTopic86869434": {
+      "Metadata": {
+        "aws:cdk:path": "CdksnsStack/MyTopic/Resource"
+      }
+    }
+  }
+}

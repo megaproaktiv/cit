@@ -39,11 +39,14 @@ func TestPhysicalID(t *testing.T) {
 
 }
 
-func TestLogicalID(t *testing.T) {
-	testfile := "testdata/template.json"
+func TestLogicalIDfromCID(t *testing.T) {
+	testfile := "testdata/template-raw.json"
 
-	logicalID := cit.LogicalIDfromCID(&testfile, aws.String("MyTopic"))
-
+	logicalID,err := cit.LogicalIDfromCID(&testfile, aws.String("MyTopic"))
+	assert.Nil(t, err, "LogicalIDfromCID should^ return no error")
+	if err != nil{
+		t.Fatal(err)
+	}
 	assert.Equal(t, "MyTopic86869434", *logicalID)
 
 }
@@ -75,5 +78,5 @@ func TestMarshallTemplate(t *testing.T){
 
 func TestExtractLogicalName(t *testing.T){
 	path := "CdksnsStack/MyTopic/Resource"
-	assert.Equal(t, "MyTopic", cit.ExtractLogicalName(&path))
+	assert.Equal(t, "MyTopic", cit.ExtractConstructID(&path))
 }
