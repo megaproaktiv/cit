@@ -1,32 +1,43 @@
 package cit
 
 import (
+	"context"
 	"encoding/json"
 	"errors"
-	"io/ioutil"
 	"log"
 	"strings"
 
 	aws "github.com/aws/aws-sdk-go-v2/aws"
+	"github.com/aws/aws-sdk-go-v2/service/cloudformation"
 )
 
 // PhysicalIDfromCID get AWS physical id from CDK contruct ID
 // stack - Stackname
 // constructID -  awssns.NewTopic(stack, jsii.String("MyTopic")  << MyTopic
-func PhysicalIDfromCID(stack *string, constructId *string) *string {
-	return aws.String("not implemented")
+func PhysicalIDfromCID(client CloudFormationInterface, stack *string, constructId *string) *string {
+	// Get Stack
+	parameterStack := &cloudformation.GetTemplateInput{
+		StackName:     stack,
+	}
+	resGetTemplate, err := client.GetTemplate(context.TODO(), parameterStack)
+
+	template := resGetTemplate.TemplateBody
+	// Find LogicalID
+	logicalID,err := LogicalIDfromCID(template, constructId)
+	if err != nil {
+		panic(err)
+	}
+	// get stackresources
+	// find physicalid
+	
+	return logicalID
 }
 
 // LogicalIDfromCID - get logicalID
-func LogicalIDfromCID(stackfile *string, constructID *string) (*string, error) {
+func LogicalIDfromCID(stackContent *string, constructID *string) (*string, error) {
 
 	stack := &Template{}
-	data, err := ioutil.ReadFile(*stackfile)
-	if err != nil {
-		panic("Cannot read " + *stackfile)
-	}
-
-	err = json.Unmarshal(data, stack)
+	err := json.Unmarshal([]byte(*stackContent), stack)
 	if err != nil {
 		panic(err)
 	}

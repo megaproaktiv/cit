@@ -3,47 +3,86 @@ package cit_test
 import (
 	"context"
 	"encoding/json"
+	"fmt"
 	"io/ioutil"
 	"testing"
 
 	aws "github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/config"
+	"github.com/aws/aws-sdk-go-v2/service/cloudformation"
 	"github.com/aws/aws-sdk-go-v2/service/ssm"
 	"github.com/megaproaktiv/cit"
 	"github.com/stretchr/testify/assert"
 )
 
 // Deploy testData stack before
-func TestPhysicalID(t *testing.T) {
+func TestPhysicalIDInteg(t *testing.T) {
 
 	cfg, err := config.LoadDefaultConfig(context.TODO())
 	if err != nil {
 		panic("configuration error, " + err.Error())
 	}
 
-	client := ssm.NewFromConfig(cfg)
+	clientSsm := ssm.NewFromConfig(cfg)
+	clientCfn := cloudformation.NewFromConfig(cfg)
 
 	params := &ssm.GetParameterInput{
 		Name: aws.String("/cit/test/snsid"),
 	}
 
-	res, err := client.GetParameter(context.TODO(), params)
+	res, err := clientSsm.GetParameter(context.TODO(), params)
 	if err != nil {
 		panic("Cant get SSM parameter - deploy testdata/cdksns stack ")
 	}
 	ssmid := res.Parameter.Value
 
-	pID := cit.PhysicalIDfromCID(aws.String("CdksnsStack"), aws.String("MyTopic"))
+	pID := cit.PhysicalIDfromCID(clientCfn, aws.String("CdksnsStack"), aws.String("MyTopic"))
 
 	assert.Equal(t, *ssmid, *pID, "PhysicalID should match ConstructID")
+
+}
+func TestPhysicalID(t *testing.T) {
+
+	// make and configure a mocked CloudFormationInterface
+	mockedCloudFormationInterface := &cit.CloudFormationInterfaceMock{
+		GetTemplateFunc: func(ctx context.Context, params *cloudformation.GetTemplateInput, optFns ...func(*cloudformation.Options)) (*cloudformation.GetTemplateOutput, error) {
+			var templateOutput cloudformation.GetTemplateOutput
+			data, err := ioutil.ReadFile("testdata/get-template.json")
+			if err != nil {
+				fmt.Println("File reading error: ", err)
+			}
+			json.Unmarshal(data, &templateOutput);
+
+			return &templateOutput, nil
+		},
+		DescribeStackResourcesFunc: func(ctx context.Context, params *cloudformation.DescribeStackResourcesInput, optFns ...func(*cloudformation.Options)) (*cloudformation.DescribeStackResourcesOutput, error) {
+			var describeOutput cloudformation.DescribeStackResourcesOutput
+			data, err := ioutil.ReadFile("testdata/stack-resources.json")
+			if err != nil {
+				fmt.Println("File reading error: ", err)
+			}
+			json.Unmarshal(data, &describeOutput);
+	
+			return &describeOutput, nil
+		},
+	}
+
+	pID := cit.PhysicalIDfromCID(mockedCloudFormationInterface,aws.String("CdksnsStack"), aws.String("MyTopic"))
+	phid := "arn:aws:sns:eu-central-1:703466486373:CdksnsStack-MyTopic86869434-8W2KJU1PQTX0"
+
+	assert.Equal(t, phid, *pID, "PhysicalID should match ConstructID")
 
 }
 
 func TestLogicalIDfromCID(t *testing.T) {
 	testfile := "testdata/template-raw.json"
-
-	logicalID,err := cit.LogicalIDfromCID(&testfile, aws.String("MyTopic"))
-	assert.Nil(t, err, "LogicalIDfromCID should^ return no error")
+	data, err := ioutil.ReadFile(testfile)
+	if err != nil {
+		fmt.Println("File reading error: ", err)
+	}
+	content := string(data)
+	logicalID,err := cit.LogicalIDfromCID(&content, aws.String("MyTopic"))
+	assert.Nil(t, err, "LogicalIDfromCID should return no error")
 	if err != nil{
 		t.Fatal(err)
 	}
