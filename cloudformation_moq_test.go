@@ -19,8 +19,8 @@ var _ CloudFormationInterface = &CloudFormationInterfaceMock{}
 //
 //         // make and configure a mocked CloudFormationInterface
 //         mockedCloudFormationInterface := &CloudFormationInterfaceMock{
-//             DescribeStackResourcesFunc: func(ctx context.Context, params *cloudformation.DescribeStackResourcesInput, optFns ...func(*cloudformation.Options)) (*cloudformation.DescribeStackResourcesOutput, error) {
-// 	               panic("mock out the DescribeStackResources method")
+//             DescribeStackResourceFunc: func(ctx context.Context, params *cloudformation.DescribeStackResourceInput, optFns ...func(*cloudformation.Options)) (*cloudformation.DescribeStackResourceOutput, error) {
+// 	               panic("mock out the DescribeStackResource method")
 //             },
 //             GetTemplateFunc: func(ctx context.Context, params *cloudformation.GetTemplateInput, optFns ...func(*cloudformation.Options)) (*cloudformation.GetTemplateOutput, error) {
 // 	               panic("mock out the GetTemplate method")
@@ -32,20 +32,20 @@ var _ CloudFormationInterface = &CloudFormationInterfaceMock{}
 //
 //     }
 type CloudFormationInterfaceMock struct {
-	// DescribeStackResourcesFunc mocks the DescribeStackResources method.
-	DescribeStackResourcesFunc func(ctx context.Context, params *cloudformation.DescribeStackResourcesInput, optFns ...func(*cloudformation.Options)) (*cloudformation.DescribeStackResourcesOutput, error)
+	// DescribeStackResourceFunc mocks the DescribeStackResource method.
+	DescribeStackResourceFunc func(ctx context.Context, params *cloudformation.DescribeStackResourceInput, optFns ...func(*cloudformation.Options)) (*cloudformation.DescribeStackResourceOutput, error)
 
 	// GetTemplateFunc mocks the GetTemplate method.
 	GetTemplateFunc func(ctx context.Context, params *cloudformation.GetTemplateInput, optFns ...func(*cloudformation.Options)) (*cloudformation.GetTemplateOutput, error)
 
 	// calls tracks calls to the methods.
 	calls struct {
-		// DescribeStackResources holds details about calls to the DescribeStackResources method.
-		DescribeStackResources []struct {
+		// DescribeStackResource holds details about calls to the DescribeStackResource method.
+		DescribeStackResource []struct {
 			// Ctx is the ctx argument value.
 			Ctx context.Context
 			// Params is the params argument value.
-			Params *cloudformation.DescribeStackResourcesInput
+			Params *cloudformation.DescribeStackResourceInput
 			// OptFns is the optFns argument value.
 			OptFns []func(*cloudformation.Options)
 		}
@@ -59,46 +59,46 @@ type CloudFormationInterfaceMock struct {
 			OptFns []func(*cloudformation.Options)
 		}
 	}
-	lockDescribeStackResources sync.RWMutex
-	lockGetTemplate            sync.RWMutex
+	lockDescribeStackResource sync.RWMutex
+	lockGetTemplate           sync.RWMutex
 }
 
-// DescribeStackResources calls DescribeStackResourcesFunc.
-func (mock *CloudFormationInterfaceMock) DescribeStackResources(ctx context.Context, params *cloudformation.DescribeStackResourcesInput, optFns ...func(*cloudformation.Options)) (*cloudformation.DescribeStackResourcesOutput, error) {
-	if mock.DescribeStackResourcesFunc == nil {
-		panic("CloudFormationInterfaceMock.DescribeStackResourcesFunc: method is nil but CloudFormationInterface.DescribeStackResources was just called")
+// DescribeStackResource calls DescribeStackResourceFunc.
+func (mock *CloudFormationInterfaceMock) DescribeStackResource(ctx context.Context, params *cloudformation.DescribeStackResourceInput, optFns ...func(*cloudformation.Options)) (*cloudformation.DescribeStackResourceOutput, error) {
+	if mock.DescribeStackResourceFunc == nil {
+		panic("CloudFormationInterfaceMock.DescribeStackResourceFunc: method is nil but CloudFormationInterface.DescribeStackResource was just called")
 	}
 	callInfo := struct {
 		Ctx    context.Context
-		Params *cloudformation.DescribeStackResourcesInput
+		Params *cloudformation.DescribeStackResourceInput
 		OptFns []func(*cloudformation.Options)
 	}{
 		Ctx:    ctx,
 		Params: params,
 		OptFns: optFns,
 	}
-	mock.lockDescribeStackResources.Lock()
-	mock.calls.DescribeStackResources = append(mock.calls.DescribeStackResources, callInfo)
-	mock.lockDescribeStackResources.Unlock()
-	return mock.DescribeStackResourcesFunc(ctx, params, optFns...)
+	mock.lockDescribeStackResource.Lock()
+	mock.calls.DescribeStackResource = append(mock.calls.DescribeStackResource, callInfo)
+	mock.lockDescribeStackResource.Unlock()
+	return mock.DescribeStackResourceFunc(ctx, params, optFns...)
 }
 
-// DescribeStackResourcesCalls gets all the calls that were made to DescribeStackResources.
+// DescribeStackResourceCalls gets all the calls that were made to DescribeStackResource.
 // Check the length with:
-//     len(mockedCloudFormationInterface.DescribeStackResourcesCalls())
-func (mock *CloudFormationInterfaceMock) DescribeStackResourcesCalls() []struct {
+//     len(mockedCloudFormationInterface.DescribeStackResourceCalls())
+func (mock *CloudFormationInterfaceMock) DescribeStackResourceCalls() []struct {
 	Ctx    context.Context
-	Params *cloudformation.DescribeStackResourcesInput
+	Params *cloudformation.DescribeStackResourceInput
 	OptFns []func(*cloudformation.Options)
 } {
 	var calls []struct {
 		Ctx    context.Context
-		Params *cloudformation.DescribeStackResourcesInput
+		Params *cloudformation.DescribeStackResourceInput
 		OptFns []func(*cloudformation.Options)
 	}
-	mock.lockDescribeStackResources.RLock()
-	calls = mock.calls.DescribeStackResources
-	mock.lockDescribeStackResources.RUnlock()
+	mock.lockDescribeStackResource.RLock()
+	calls = mock.calls.DescribeStackResource
+	mock.lockDescribeStackResource.RUnlock()
 	return calls
 }
 

@@ -1,0 +1,15 @@
+{
+    "StackResourceDetail": {
+        "StackName": "CdksnsStack",
+        "StackId": "arn:aws:cloudformation:eu-central-1:703466486373:stack/CdksnsStack/b0dc4710-c068-11eb-a6f5-0afe841876c0",
+        "LogicalResourceId": "MyTopic86869434",
+        "PhysicalResourceId": "arn:aws:sns:eu-central-1:703466486373:CdksnsStack-MyTopic86869434-8W2KJU1PQTX0",
+        "ResourceType": "AWS::SNS::Topic",
+        "LastUpdatedTimestamp": "2021-05-29T10:29:24.338000+00:00",
+        "ResourceStatus": "CREATE_COMPLETE",
+        "Metadata": "{\"aws:cdk:path\":\"CdksnsStack/MyTopic/Resource\"}",
+        "DriftInformation": {
+            "StackResourceDriftStatus": "NOT_CHECKED"
+        }
+    }
+}

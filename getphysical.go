@@ -20,6 +20,9 @@ func PhysicalIDfromCID(client CloudFormationInterface, stack *string, constructI
 		StackName:     stack,
 	}
 	resGetTemplate, err := client.GetTemplate(context.TODO(), parameterStack)
+	if err != nil {
+		panic(err)
+	}
 
 	template := resGetTemplate.TemplateBody
 	// Find LogicalID
@@ -28,9 +31,18 @@ func PhysicalIDfromCID(client CloudFormationInterface, stack *string, constructI
 		panic(err)
 	}
 	// get stackresources
+	parameterResource := &cloudformation.DescribeStackResourceInput{
+		LogicalResourceId: logicalID,
+		StackName:         stack,
+	}
+	resourceDetail,err := client.DescribeStackResource(context.TODO(), parameterResource)
+	if err != nil {
+		panic(err)
+	}
 	// find physicalid
+	physicalId := resourceDetail.StackResourceDetail.PhysicalResourceId
 	
-	return logicalID
+	return physicalId
 }
 
 // LogicalIDfromCID - get logicalID
