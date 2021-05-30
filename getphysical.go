@@ -1,13 +1,13 @@
 package cit
 
 import (
-	"fmt"
+	"encoding/json"
+	"errors"
+	"io/ioutil"
 	"log"
 	"strings"
 
 	aws "github.com/aws/aws-sdk-go-v2/aws"
-	goformation "github.com/awslabs/goformation/v4"
-	"github.com/awslabs/goformation/v4/intrinsics"
 )
 
 // PhysicalIDfromCID get AWS physical id from CDK contruct ID
@@ -18,27 +18,38 @@ func PhysicalIDfromCID(stack *string, constructId *string) *string {
 }
 
 // LogicalIDfromCID - get logicalID
-func LogicalIDfromCID(stackfile *string, constructID *string) *string{
+func LogicalIDfromCID(stackfile *string, constructID *string) (*string, error) {
 
-	// Do not process, goformation can`t handle cdk generated data
-	template, err := goformation.OpenWithOptions(*stackfile, &intrinsics.ProcessorOptions{
-		NoProcess: true,
-		EvaluateConditions: false,
-	})
+	stack := &Template{}
+	data, err := ioutil.ReadFile(*stackfile)
 	if err != nil {
-		log.Fatalf("There was an error processing the template: %s", err)
+		panic("Cannot read " + *stackfile)
 	}
 
-	for _, resource := range template.Resources {
-		fmt.Println(resource.AWSCloudFormationType())
+	err = json.Unmarshal(data, stack)
+	if err != nil {
+		panic(err)
+	}
+	if err != nil {
+		log.Fatal("There was an error processing the template: ", err)
 	}
 
-	
+	for key, resource := range stack.Resources {
+		if resource.Metadata != nil {
+			if resource.Metadata["aws:cdk:path"] != "" {
+				meta := resource.Metadata["aws:cdk:path"]
+				templateConstructID := ExtractConstructID(&meta)
+				if templateConstructID == *constructID {
+						return &key, nil
+				}
+			}
+		}
+	}
 
-	return nil
+	return aws.String(""), errors.New("ConstructID not found")
 }
 
-func ExtractLogicalName( path *string) string{
+func ExtractConstructID(path *string) string {
 	var parts = strings.Split(*path, "/")
 	return parts[1]
 }
