@@ -16,8 +16,10 @@ import (
 )
 
 // Deploy testData stack before
-func TestPhysicalIDInteg(t *testing.T) {
-
+func TestIntegPhysicalID(t *testing.T) {
+	if testing.Short() {
+		t.Skip("skipping aws api access")
+	  }
 	cfg, err := config.LoadDefaultConfig(context.TODO())
 	if err != nil {
 		panic("configuration error, " + err.Error())
@@ -45,19 +47,23 @@ func TestPhysicalID(t *testing.T) {
 
 	// make and configure a mocked CloudFormationInterface
 	mockedCloudFormationInterface := &cit.CloudFormationInterfaceMock{
-		GetTemplateFunc: func(ctx context.Context, params *cloudformation.GetTemplateInput, optFns ...func(*cloudformation.Options)) (*cloudformation.GetTemplateOutput, error) {
+		GetTemplateFunc: func(ctx context.Context, 
+			params *cloudformation.GetTemplateInput, optFns ...func(*cloudformation.Options)) (*cloudformation.GetTemplateOutput, error) {
 			var templateOutput cloudformation.GetTemplateOutput
-			data, err := ioutil.ReadFile("testdata/get-template.json")
+			data, err := ioutil.ReadFile("testdata/template-body.json")
 			if err != nil {
 				fmt.Println("File reading error: ", err)
 			}
-			json.Unmarshal(data, &templateOutput);
+			content := string(data)
+			templateOutput.TemplateBody = &content
 
 			return &templateOutput, nil
 		},
-		DescribeStackResourcesFunc: func(ctx context.Context, params *cloudformation.DescribeStackResourcesInput, optFns ...func(*cloudformation.Options)) (*cloudformation.DescribeStackResourcesOutput, error) {
-			var describeOutput cloudformation.DescribeStackResourcesOutput
-			data, err := ioutil.ReadFile("testdata/stack-resources.json")
+		DescribeStackResourceFunc: func(ctx context.Context, 
+			params *cloudformation.DescribeStackResourceInput, 
+			optFns ...func(*cloudformation.Options)) (*cloudformation.DescribeStackResourceOutput, error) {
+			var describeOutput cloudformation.DescribeStackResourceOutput
+			data, err := ioutil.ReadFile("testdata/stack-resource.json")
 			if err != nil {
 				fmt.Println("File reading error: ", err)
 			}
@@ -67,10 +73,12 @@ func TestPhysicalID(t *testing.T) {
 		},
 	}
 
-	pID := cit.PhysicalIDfromCID(mockedCloudFormationInterface,aws.String("CdksnsStack"), aws.String("MyTopic"))
-	phid := "arn:aws:sns:eu-central-1:703466486373:CdksnsStack-MyTopic86869434-8W2KJU1PQTX0"
+	actualPhid := cit.PhysicalIDfromCID(mockedCloudFormationInterface,
+		aws.String("CdksnsStack"), 
+		aws.String("MyTopic"))
+	expectedPhid := "arn:aws:sns:eu-central-1:703466486373:CdksnsStack-MyTopic86869434-8W2KJU1PQTX0"
 
-	assert.Equal(t, phid, *pID, "PhysicalID should match ConstructID")
+	assert.Equal(t, expectedPhid, *actualPhid, "PhysicalID should match ConstructID")
 
 }
 
