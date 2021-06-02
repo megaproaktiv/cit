@@ -12,5 +12,5 @@ See [Blog1](https://aws-blog.de/2021/05/cit-build-cdk-infrastructure-testing-par
 ## Deploy
 
 git tag <version>
-git push origin <version>
+git push mpa <version>
 

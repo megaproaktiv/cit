@@ -4,7 +4,7 @@ import (
 	"context"
 	"encoding/json"
 	"errors"
-	"log"
+	log "github.com/sirupsen/logrus"
 	"strings"
 
 	aws "github.com/aws/aws-sdk-go-v2/aws"
@@ -61,6 +61,7 @@ func LogicalIDfromCID(stackContent *string, constructID *string) (*string, error
 		if resource.Metadata != nil {
 			if resource.Metadata["aws:cdk:path"] != "" {
 				meta := resource.Metadata["aws:cdk:path"]
+				log.Debug("Path: ",meta)
 				templateConstructID := ExtractConstructID(&meta)
 				if templateConstructID == *constructID {
 						return &key, nil
@@ -72,7 +73,13 @@ func LogicalIDfromCID(stackContent *string, constructID *string) (*string, error
 	return aws.String(""), errors.New("ConstructID not found")
 }
 
+// ExtractCounstructid
+//         "aws:cdk:path": "vpc/baseVPC/Resource"
 func ExtractConstructID(path *string) string {
 	var parts = strings.Split(*path, "/")
-	return parts[1]
+	if parts[2] == "Resource"{
+		return parts[1]
+	}else{
+		return ""
+	}
 }
