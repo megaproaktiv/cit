@@ -33,3 +33,17 @@ func GetVpc(stackname *string, constructID *string) (*types.Vpc, error ){
 	vpc := vpcInfo.Vpcs[0]
 	return &vpc, nil
 }
+
+// GetSecurityGroup - VPC Object
+func GetSecurityGroup(stackname *string, constructID *string) (*types.SecurityGroup, error ){
+	securityGroupId := cit.PhysicalIDfromCID(cit.CfnClient, aws.String("vpc"), aws.String("baseVPC"))
+	parms := &awsec2.DescribeSecurityGroupsInput{
+		GroupIds:   []string{*securityGroupId},
+	}
+	sgInfo,err := client.DescribeSecurityGroups(context.TODO(), parms)
+	if err != nil {
+		panic("DescribeSecurityGroups error, " + err.Error())
+	}
+	sg := sgInfo.SecurityGroups[0]
+	return &sg, nil
+}
