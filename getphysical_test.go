@@ -38,8 +38,8 @@ func TestIntegPhysicalID(t *testing.T) {
 	}
 	ssmid := res.Parameter.Value
 
-	pID := cit.PhysicalIDfromCID(clientCfn, aws.String("CdksnsStack"), aws.String("MyTopic"))
-
+	pID,err := cit.PhysicalIDfromCID(clientCfn, aws.String("CdksnsStack"), aws.String("MyTopic"))
+	assert.Nil(t, err, "PhysicalIDfromCID should return no err")
 	assert.Equal(t, *ssmid, *pID, "PhysicalID should match ConstructID")
 
 }
@@ -73,11 +73,11 @@ func TestPhysicalID(t *testing.T) {
 		},
 	}
 
-	actualPhid := cit.PhysicalIDfromCID(mockedCloudFormationInterface,
+	actualPhid,err := cit.PhysicalIDfromCID(mockedCloudFormationInterface,
 		aws.String("CdksnsStack"), 
 		aws.String("MyTopic"))
 	expectedPhid := "arn:aws:sns:eu-central-1:703466486373:CdksnsStack-MyTopic86869434-8W2KJU1PQTX0"
-
+	assert.Nil(t, err, "PhysicalIDfromCID should give no error" )
 	assert.Equal(t, expectedPhid, *actualPhid, "PhysicalID should match ConstructID")
 
 }

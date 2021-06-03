@@ -14,21 +14,23 @@ import (
 // PhysicalIDfromCID get AWS physical id from CDK contruct ID
 // stack - Stackname
 // constructID -  awssns.NewTopic(stack, jsii.String("MyTopic")  << MyTopic
-func PhysicalIDfromCID(client CloudFormationInterface, stack *string, constructId *string) *string {
+func PhysicalIDfromCID(client CloudFormationInterface, stack *string, constructId *string) (*string, error) {
 	// Get Stack
 	parameterStack := &cloudformation.GetTemplateInput{
 		StackName:     stack,
 	}
+
 	resGetTemplate, err := client.GetTemplate(context.TODO(), parameterStack)
 	if err != nil {
-		panic(err)
+		log.Fatal("Template "+*stack+" not found")
+		return nil, err
 	}
 
 	template := resGetTemplate.TemplateBody
 	// Find LogicalID
 	logicalID,err := LogicalIDfromCID(template, constructId)
 	if err != nil {
-		panic(err)
+		return nil, err
 	}
 	// get stackresources
 	parameterResource := &cloudformation.DescribeStackResourceInput{
@@ -37,12 +39,12 @@ func PhysicalIDfromCID(client CloudFormationInterface, stack *string, constructI
 	}
 	resourceDetail,err := client.DescribeStackResource(context.TODO(), parameterResource)
 	if err != nil {
-		panic(err)
+		return nil, err
 	}
 	// find physicalid
 	physicalId := resourceDetail.StackResourceDetail.PhysicalResourceId
 	
-	return physicalId
+	return physicalId,nil
 }
 
 // LogicalIDfromCID - get logicalID
@@ -50,11 +52,10 @@ func LogicalIDfromCID(stackContent *string, constructID *string) (*string, error
 
 	stack := &Template{}
 	err := json.Unmarshal([]byte(*stackContent), stack)
-	if err != nil {
-		panic(err)
-	}
+	
 	if err != nil {
 		log.Fatal("There was an error processing the template: ", err)
+		return nil, err
 	}
 
 	for key, resource := range stack.Resources {
