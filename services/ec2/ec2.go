@@ -3,7 +3,6 @@ package ec2
 import (
 	"context"
 
-	aws "github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/config"
 	awsec2 "github.com/aws/aws-sdk-go-v2/service/ec2"
 	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
@@ -22,13 +21,16 @@ func init(){
 
 // GetVPC - VPC Object
 func GetVpc(stackname *string, constructID *string) (*types.Vpc, error ){
-	vpcId := cit.PhysicalIDfromCID(cit.CfnClient, aws.String("vpc"), aws.String("baseVPC"))
+	vpcId,err := cit.PhysicalIDfromCID(cit.CfnClient,stackname, constructID)
+	if err != nil {
+		return nil, err
+	}
 	parms := &awsec2.DescribeVpcsInput{
 		VpcIds:     []string{*vpcId},
 	}
 	vpcInfo,err := client.DescribeVpcs(context.TODO(), parms)
 	if err != nil {
-		panic("DescribeVpcs error, " + err.Error())
+		return nil, err
 	}
 	vpc := vpcInfo.Vpcs[0]
 	return &vpc, nil
@@ -36,14 +38,33 @@ func GetVpc(stackname *string, constructID *string) (*types.Vpc, error ){
 
 // GetSecurityGroup - VPC Object
 func GetSecurityGroup(stackname *string, constructID *string) (*types.SecurityGroup, error ){
-	securityGroupId := cit.PhysicalIDfromCID(cit.CfnClient, aws.String("vpc"), aws.String("baseVPC"))
+	securityGroupId,err := cit.PhysicalIDfromCID(cit.CfnClient, stackname, constructID)
+	if err != nil {
+		return nil, err
+	}
 	parms := &awsec2.DescribeSecurityGroupsInput{
 		GroupIds:   []string{*securityGroupId},
 	}
 	sgInfo,err := client.DescribeSecurityGroups(context.TODO(), parms)
 	if err != nil {
-		panic("DescribeSecurityGroups error, " + err.Error())
+		return nil, err
 	}
 	sg := sgInfo.SecurityGroups[0]
 	return &sg, nil
+}
+
+func GetInstance(stackname *string, constructID *string) (*types.Instance, error ){
+	id, err:= cit.PhysicalIDfromCID(cit.CfnClient, stackname, constructID)
+	if err != nil {
+		return nil, err
+	}
+	parms := &awsec2.DescribeInstancesInput{
+		InstanceIds: []string{*id},
+	}
+	info,err := client.DescribeInstances(context.TODO(), parms)
+	if err != nil {
+		return nil, err
+	}
+	object := info.Reservations[0].Instances[0]
+	return &object, nil
 }

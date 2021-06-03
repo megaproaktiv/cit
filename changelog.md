@@ -6,7 +6,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 ### Added
+
+## [0.1.4]
+### Added
 - GetSecurityGroup
+- iam.GetUser
+- albv2.GetLoadBalancer
 
 ## [0.1.1] - 2021-06-02
 ### Added

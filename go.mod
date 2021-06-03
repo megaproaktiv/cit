@@ -7,7 +7,11 @@ require (
 	github.com/aws/aws-sdk-go-v2/config v1.3.0
 	github.com/aws/aws-sdk-go-v2/service/cloudformation v1.5.1 // indirect
 	github.com/aws/aws-sdk-go-v2/service/ec2 v1.8.0 // indirect
+	github.com/aws/aws-sdk-go-v2/service/elasticloadbalancingv2 v1.3.1 // indirect
+	github.com/aws/aws-sdk-go-v2/service/iam v1.5.0 // indirect
 	github.com/aws/aws-sdk-go-v2/service/ssm v1.6.1
+	github.com/aws/aws-sdk-go-v2/service/sts v1.4.1 // indirect
+	github.com/gruntwork-io/terratest v0.35.1 // indirect
 	github.com/sirupsen/logrus v1.8.1 // indirect
 	github.com/stretchr/testify v1.7.0
 )
