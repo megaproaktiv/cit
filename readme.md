@@ -64,9 +64,3 @@ go test -v
 
 "PASS" or "FAIL" will indicate whether the created vpc exists and have this cdr block.
 
-
-## Deploy
-
-git tag <version>
-git push mpa <version>
-

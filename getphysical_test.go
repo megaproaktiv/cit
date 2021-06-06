@@ -8,41 +8,13 @@ import (
 	"testing"
 
 	aws "github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/config"
 	"github.com/aws/aws-sdk-go-v2/service/cloudformation"
-	"github.com/aws/aws-sdk-go-v2/service/ssm"
 	"github.com/megaproaktiv/cit"
 	"github.com/stretchr/testify/assert"
 )
 
 // Deploy testData stack before
-func TestIntegPhysicalID(t *testing.T) {
-	if testing.Short() {
-		t.Skip("skipping aws api access")
-	  }
-	cfg, err := config.LoadDefaultConfig(context.TODO())
-	if err != nil {
-		panic("configuration error, " + err.Error())
-	}
 
-	clientSsm := ssm.NewFromConfig(cfg)
-	clientCfn := cloudformation.NewFromConfig(cfg)
-
-	params := &ssm.GetParameterInput{
-		Name: aws.String("/cit/test/snsid"),
-	}
-
-	res, err := clientSsm.GetParameter(context.TODO(), params)
-	if err != nil {
-		panic("Cant get SSM parameter - deploy testdata/cdksns stack ")
-	}
-	ssmid := res.Parameter.Value
-
-	pID,err := cit.PhysicalIDfromCID(clientCfn, aws.String("CdksnsStack"), aws.String("MyTopic"))
-	assert.Nil(t, err, "PhysicalIDfromCID should return no err")
-	assert.Equal(t, *ssmid, *pID, "PhysicalID should match ConstructID")
-
-}
 func TestPhysicalID(t *testing.T) {
 
 	// make and configure a mocked CloudFormationInterface

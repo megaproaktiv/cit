@@ -1,22 +1,23 @@
-package ec2
+package citec2
 
 import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/config"
-	awsec2 "github.com/aws/aws-sdk-go-v2/service/ec2"
+	"github.com/aws/aws-sdk-go-v2/service/ec2"
 	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
+
 	"github.com/megaproaktiv/cit"
 )
 
-var client *awsec2.Client
+var client *ec2.Client
 
 func init(){
 	cfg, err := config.LoadDefaultConfig(context.TODO())
 	if err != nil {
 		panic("configuration error, " + err.Error())
 	}
-	client  = awsec2.NewFromConfig(cfg)
+	client  = ec2.NewFromConfig(cfg)
 }
 
 // GetVPC - VPC Object
@@ -25,7 +26,7 @@ func GetVpc(stackname *string, constructID *string) (*types.Vpc, error ){
 	if err != nil {
 		return nil, err
 	}
-	parms := &awsec2.DescribeVpcsInput{
+	parms := &ec2.DescribeVpcsInput{
 		VpcIds:     []string{*vpcId},
 	}
 	vpcInfo,err := client.DescribeVpcs(context.TODO(), parms)
@@ -42,7 +43,7 @@ func GetSecurityGroup(stackname *string, constructID *string) (*types.SecurityGr
 	if err != nil {
 		return nil, err
 	}
-	parms := &awsec2.DescribeSecurityGroupsInput{
+	parms := &ec2.DescribeSecurityGroupsInput{
 		GroupIds:   []string{*securityGroupId},
 	}
 	sgInfo,err := client.DescribeSecurityGroups(context.TODO(), parms)
@@ -58,7 +59,7 @@ func GetInstance(stackname *string, constructID *string) (*types.Instance, error
 	if err != nil {
 		return nil, err
 	}
-	parms := &awsec2.DescribeInstancesInput{
+	parms := &ec2.DescribeInstancesInput{
 		InstanceIds: []string{*id},
 	}
 	info,err := client.DescribeInstances(context.TODO(), parms)

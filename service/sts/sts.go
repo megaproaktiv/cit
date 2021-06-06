@@ -1,22 +1,21 @@
-package sts
+package citsts
 
 import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/config"
 	"github.com/aws/aws-sdk-go-v2/service/sts"
-	awssts "github.com/aws/aws-sdk-go-v2/service/sts"
 	
 )
 
-var client *awssts.Client
+var client *sts.Client
 
 func init(){
 	cfg, err := config.LoadDefaultConfig(context.TODO())
 	if err != nil {
 		panic("configuration error, " + err.Error())
 	}
-	client  = awssts.NewFromConfig(cfg)
+	client  = sts.NewFromConfig(cfg)
 }
 
 // GetAccount - Number
