@@ -19,14 +19,12 @@ In Typescript you create a stack named "vpc":
 
 ```ts
 new VpcProjektStack(app, 'vpc', {
-...
 ```
 
 And name the construct "baseVPC".
 
 ```ts
 var vpc = new Vpc(this, "baseVPC", {
-...
 ```
 
 Now you can test things on the created AWS vpc with a small go programm:
