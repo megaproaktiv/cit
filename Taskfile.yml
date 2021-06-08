@@ -14,7 +14,7 @@ tasks:
   test:
     desc: Go test without aws access
     cmds:
-      - go test -short -v
+      - go test ./... -v
 
   generate:
     desc: Go generation
