@@ -3,7 +3,6 @@
 CDK Infrastructure Testing
 
 Project to support Infrastructure Testing with AWS CDK.
-
 You get physical Resource objects from the name of the cdk stack and the constructid.
 
 ![Overview](img/mapping.png)
