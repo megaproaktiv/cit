@@ -30,14 +30,14 @@ func init() {
 	}
 }
 
-func IdentityExists(indentity *string) (bool, error) {
+func IdentityExists(identity *string) (bool, error) {
 	parms := &ses.ListIdentitiesInput{}
 	info, err := client.ListIdentities(context.TODO(), parms)
 	if err != nil {
 		return false, err
 	}
 	for _, r := range info.Identities {
-		if r == *indentity {
+		if r == *identity {
 			return true, nil
 		}
 	}

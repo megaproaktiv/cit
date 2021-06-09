@@ -1,0 +1,15 @@
+{
+    "StackResourceDetail": {
+        "StackName": "LambdaSimpleStack",
+        "StackId": "arn:aws:cloudformation:eu-central-1:832282226273:stack/LambdaSimpleStack/e71688c0-c95c-11eb-b195-0a68dd1c0600",
+        "LogicalResourceId": "HelloHandler2E4FBA4D",
+        "PhysicalResourceId": "LambdaSimpleStack-HelloHandler2E4FBA4D-ZqznH9gomexC",
+        "ResourceType": "AWS::Lambda::Function",
+        "LastUpdatedTimestamp": "2021-06-09T19:58:23.035000+00:00",
+        "ResourceStatus": "CREATE_COMPLETE",
+        "Metadata": "{\"aws:asset:property\":\"Code\",\"aws:asset:path\":\"asset.a01c559c630927e9eb099ca8bbfeefab275803084f45afc49df016a266708df5\",\"aws:cdk:path\":\"LambdaSimpleStack/HelloHandler/Resource\"}",
+        "DriftInformation": {
+            "StackResourceDriftStatus": "NOT_CHECKED"
+        }
+    }
+}

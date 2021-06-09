@@ -1,0 +1,32 @@
+{
+    "Configuration": {
+        "FunctionName": "LambdaSimpleStack-HelloHandler2E4FBA4D-ZqznH9gomexC",
+        "FunctionArn": "arn:aws:lambda:eu-central-1:832282226273:function:LambdaSimpleStack-HelloHandler2E4FBA4D-ZqznH9gomexC",
+        "Runtime": "nodejs14.x",
+        "Role": "arn:aws:iam::832282226273:role/LambdaSimpleStack-HelloHandlerServiceRole11EF7C63-113HEXZL0RHXR",
+        "Handler": "hello.handler",
+        "CodeSize": 343,
+        "Description": "",
+        "Timeout": 3,
+        "MemorySize": 1024,
+        "LastModified": "2021-06-09T19:58:21.626+0000",
+        "CodeSha256": "wGVR4+66JwANjVwwzBWSG93pqeZI/eqHaFlPBVxBTus=",
+        "Version": "$LATEST",
+        "TracingConfig": {
+            "Mode": "PassThrough"
+        },
+        "RevisionId": "c65e595f-7d01-4081-9f2a-574bddb923a6",
+        "State": "Active",
+        "LastUpdateStatus": "Successful",
+        "PackageType": "Zip"
+    },
+    "Code": {
+        "RepositoryType": "S3",
+        "Location": "https://awslambda-eu-cent-1-tasks.s3.eu-central-1.amazonaws.com/snapshots/832282226273/LambdaSimpleStack-HelloHandler2E4FBA4D-ZqznH9gomexC-0834936d-79cd-42a6-90c3-98e791a97be4?versionId=yL30nrNvxaXuvb2jGmzHBVI6DLMFvDx2&X-Amz-Security-Token=IQoJb3JpZ2luX2VjENv%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaDGV1LWNlbnRyYWwtMSJHMEUCICTRNn0D%2By%2BpZCxdYCV6KPZiyWpe9OeyEJ8KXkAfk6zoAiEAsIla79cABfO8Z8l1OKX6N%2BhJSthKvO8KNqgbU0DY38MqiQQIlP%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FARADGgw2ODA2ODY1NTk0MzQiDDLjI6IIVkops79I3SrdA7G2T3ot9hsa1%2BrDXMJpbsZLQMLU22T3DR9ytSi6DaY9S%2BT7TtsMvk0N3eioHU7FlkWXIUqnhctWBGSMfBwFda6ntgltzPiTeQaCCRBPxhB0CFe1VCM3V5EfDwSYUJPQQhb1%2FYEofZbkogiUkNV%2F7Z1H81kLUH1FjwxmxcLk2ScPwiOxcEoyVd%2F09PG%2By%2BNy%2FsBO3%2BEfTflKcs9vTT30xIwcYnPznZBoWEgIVl%2BDWDNH8FAAiXE3dNdB4tHop75M%2F7%2BgbZiT%2Bs2Mm%2BP%2FbJMeK9bAAthEjjA9aUIq%2FKwK%2BsLk9sIaqUlLni9CNwZxLekUfYFq2vhCuDmfTpfrD%2BwGpstPmWlRFuW%2BWk%2Fk6cKVfsXWkoRpDPz3S44txhFjvOQETTFwAhGmIaEuosW7OB9dZl3OKPuj0%2FR3%2FEuetWQfggmAs2GPEjIscAGD9%2BRXf1xrLo3PBjSNXWAMWgna4Ib9m1tLU3f4151YkNPi9VzqxsCTYfTjsTEbL07PhtQKtCzxH48LYdmUKP%2F2WNkC1oR5uROmpchMig%2F94jQlyy4ASPJjeU7LCvZM8sBAfkHrQ75dbpAZcoDwoyD%2FGX5sUxyipnIc%2F43DDGRdhfesE4nIcVzpRnCM0mi1yT%2FKVJw2HDDhmoSGBjqlAVMllKA2qrWLeoepIt9WBsvvBeoFfiR2QUMEVKaDr4c7HlduNBMkTYJPd929a50X5ZA7%2FbC9EOc8Xh4Ps848QCro9S2MkM4Nrd93wUkmeYNGTP9noUYycODRGf2GiXnpUpTUsbw1J99FcYFQSTciQjQSOQ7CLWZIVbEpeqxFBLFrW0jWPBw5smfGdiv2Iauich0jwRDPZrKbYz5dWtl9Htj%2BlYJaOg%3D%3D&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20210609T200023Z&X-Amz-SignedHeaders=host&X-Amz-Expires=600&X-Amz-Credential=ASIAZ47AUUDFCGC4KHFJ%2F20210609%2Feu-central-1%2Fs3%2Faws4_request&X-Amz-Signature=1b722b75f677bc582355a617e6f0dd6463da3d2886b5b1b39f09c927a0681fc1"
+    },
+    "Tags": {
+        "aws:cloudformation:stack-name": "LambdaSimpleStack",
+        "aws:cloudformation:stack-id": "arn:aws:cloudformation:eu-central-1:832282226273:stack/LambdaSimpleStack/e71688c0-c95c-11eb-b195-0a68dd1c0600",
+        "aws:cloudformation:logical-id": "HelloHandler2E4FBA4D"
+    }
+}

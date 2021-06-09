@@ -1,3 +1,16 @@
+// CDK Infrastructure Testing (cit) - EC2 helper
+// 
+// You run the cit test after 
+// 		cdk deploy
+//
+// Example:
+// 		func TestVpcCit(t *testing.T){
+// 
+// 			vpc,err := ec2.GetVpc(aws.String("VpcStack"), aws.String("MyVpc"))
+// 			assert.Nil(t,err)
+// 			assert.Equal(t, "10.0.0.0/16",*vpc.CidrBlock)
+// 		}
+
 package citec2
 
 import (
@@ -21,6 +34,9 @@ func init(){
 }
 
 // GetVPC - VPC Object
+// stackname - the CDK stack name as given in 
+// 		cdk ls
+// constructId - the ID of the vpc Construct
 func GetVpc(stackname *string, constructID *string) (*types.Vpc, error ){
 	vpcId,err := cit.PhysicalIDfromCID(cit.CfnClient,stackname, constructID)
 	if err != nil {
@@ -38,6 +54,9 @@ func GetVpc(stackname *string, constructID *string) (*types.Vpc, error ){
 }
 
 // GetSecurityGroup - VPC Object
+// stackname - the CDK stack name as given in 
+// 		cdk ls
+// constructId - the ID of the security group Construct
 func GetSecurityGroup(stackname *string, constructID *string) (*types.SecurityGroup, error ){
 	securityGroupId,err := cit.PhysicalIDfromCID(cit.CfnClient, stackname, constructID)
 	if err != nil {
@@ -54,6 +73,10 @@ func GetSecurityGroup(stackname *string, constructID *string) (*types.SecurityGr
 	return &sg, nil
 }
 
+// GetSecurityGroup - VPC Object
+// stackname - the CDK stack name as given in 
+// 		cdk ls
+// constructId - the ID of the instance Construct
 func GetInstance(stackname *string, constructID *string) (*types.Instance, error ){
 	id, err:= cit.PhysicalIDfromCID(cit.CfnClient, stackname, constructID)
 	if err != nil {

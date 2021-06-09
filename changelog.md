@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 ### Added
 
+## [0.1.12]
+### Added
+- Lambda with mocked Cfn and lambda client
+
+
 ## [0.1.5]
 ### Added
 - GetSecurityGroup
