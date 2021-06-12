@@ -48,7 +48,7 @@ func TestPhysicalID(t *testing.T) {
 	actualPhid,err := cit.PhysicalIDfromCID(mockedCloudFormationInterface,
 		aws.String("CdksnsStack"), 
 		aws.String("MyTopic"))
-	expectedPhid := "arn:aws:sns:eu-central-1:703466486373:CdksnsStack-MyTopic86869434-8W2KJU1PQTX0"
+	expectedPhid := "arn:aws:sns:eu-central-1:111122225555:CdksnsStack-MyTopic86869434-8W2KJU1PQTX0"
 	assert.Nil(t, err, "PhysicalIDfromCID should give no error" )
 	assert.Equal(t, expectedPhid, *actualPhid, "PhysicalID should match ConstructID")
 
