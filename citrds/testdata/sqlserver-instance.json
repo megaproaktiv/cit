@@ -1,0 +1,107 @@
+{
+    "DBInstances": [
+        {
+            "DBInstanceIdentifier": "hrdirektdb",
+            "DBInstanceClass": "db.m5.xlarge",
+            "Engine": "sqlserver-se",
+            "DBInstanceStatus": "available",
+            "MasterUsername": "admin",
+            "Endpoint": {
+                "Address": "hrdirektdb.chma8qhqtyxb.eu-central-1.rds.amazonaws.com",
+                "Port": 1433,
+                "HostedZoneId": "Z1RLNUO7B9Q6NB"
+            },
+            "AllocatedStorage": 180,
+            "InstanceCreateTime": "2021-02-05T20:20:15.666000+00:00",
+            "PreferredBackupWindow": "21:33-22:03",
+            "BackupRetentionPeriod": 7,
+            "DBSecurityGroups": [],
+            "VpcSecurityGroups": [
+                {
+                    "VpcSecurityGroupId": "sg-00d9fa890af6b966a",
+                    "Status": "active"
+                }
+            ],
+            "DBParameterGroups": [
+                {
+                    "DBParameterGroupName": "default.sqlserver-se-15.0",
+                    "ParameterApplyStatus": "in-sync"
+                }
+            ],
+            "AvailabilityZone": "eu-central-1a",
+            "DBSubnetGroup": {
+                "DBSubnetGroupName": "rdsstack-mssqlsubnetgroup1bf5a223-1h3ni71va4fo7",
+                "DBSubnetGroupDescription": "Subnet group for MSSQL database",
+                "VpcId": "vpc-0ac94f937183d134a",
+                "SubnetGroupStatus": "Complete",
+                "Subnets": [
+                    {
+                        "SubnetIdentifier": "subnet-0397d087e9234a4b0",
+                        "SubnetAvailabilityZone": {
+                            "Name": "eu-central-1a"
+                        },
+                        "SubnetOutpost": {},
+                        "SubnetStatus": "Active"
+                    },
+                    {
+                        "SubnetIdentifier": "subnet-054633955f0e8114f",
+                        "SubnetAvailabilityZone": {
+                            "Name": "eu-central-1b"
+                        },
+                        "SubnetOutpost": {},
+                        "SubnetStatus": "Active"
+                    }
+                ]
+            },
+            "PreferredMaintenanceWindow": "tue:22:56-tue:23:26",
+            "PendingModifiedValues": {},
+            "LatestRestorableTime": "2021-06-10T10:32:01+00:00",
+            "MultiAZ": false,
+            "EngineVersion": "15.00.4073.23.v1",
+            "AutoMinorVersionUpgrade": true,
+            "ReadReplicaDBInstanceIdentifiers": [],
+            "LicenseModel": "license-included",
+            "OptionGroupMemberships": [
+                {
+                    "OptionGroupName": "er-ag",
+                    "Status": "in-sync"
+                }
+            ],
+            "CharacterSetName": "SQL_Latin1_General_CP1_CI_AS",
+            "PubliclyAccessible": false,
+            "StorageType": "gp2",
+            "DbInstancePort": 0,
+            "StorageEncrypted": false,
+            "DbiResourceId": "db-JYGTAPYKI2OUYTSKXERMYX2TQY",
+            "CACertificateIdentifier": "rds-ca-2019",
+            "DomainMemberships": [],
+            "CopyTagsToSnapshot": true,
+            "MonitoringInterval": 60,
+            "EnhancedMonitoringResourceArn": "arn:aws:logs:eu-central-1:675851148855:log-group:RDSOSMetrics:log-stream:db-JYGTAPYKI2OUYTSKXERMYX2TQY",
+            "MonitoringRoleArn": "arn:aws:iam::675851148855:role/RdsStack-MSSQLMonitoringRole8A5750CE-1LRAYQC8K1E2R",
+            "DBInstanceArn": "arn:aws:rds:eu-central-1:675851148855:db:hrdirektdb",
+            "IAMDatabaseAuthenticationEnabled": false,
+            "PerformanceInsightsEnabled": true,
+            "PerformanceInsightsKMSKeyId": "arn:aws:kms:eu-central-1:675851148855:key/a93c527d-50a6-496d-9403-1e073caaeea6",
+            "PerformanceInsightsRetentionPeriod": 7,
+            "DeletionProtection": true,
+            "AssociatedRoles": [],
+            "MaxAllocatedStorage": 1000,
+            "TagList": [
+                {
+                    "Key": "aws:cloudformation:stack-id",
+                    "Value": "arn:aws:cloudformation:eu-central-1:675851148855:stack/RdsStack/31bd50a0-67ee-11eb-8ced-0a13308c98dc"
+                },
+                {
+                    "Key": "aws:cloudformation:stack-name",
+                    "Value": "RdsStack"
+                },
+                {
+                    "Key": "aws:cloudformation:logical-id",
+                    "Value": "MSSQL1FD877DF"
+                }
+            ],
+            "CustomerOwnedIpEnabled": false
+        }
+    ]
+}

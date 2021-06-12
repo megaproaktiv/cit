@@ -2,7 +2,7 @@
     "StackResources": [
         {
             "StackName": "CdksnsStack",
-            "StackId": "arn:aws:cloudformation:eu-central-1:703466486373:stack/CdksnsStack/b0dc4710-c068-11eb-a6f5-0afe841876c0",
+            "StackId": "arn:aws:cloudformation:eu-central-1:111122225555:stack/CdksnsStack/b0dc4710-c068-11eb-a6f5-0afe841876c0",
             "LogicalResourceId": "CDKMetadata",
             "PhysicalResourceId": "b0dc4710-c068-11eb-a6f5-0afe841876c0",
             "ResourceType": "AWS::CDK::Metadata",
@@ -14,9 +14,9 @@
         },
         {
             "StackName": "CdksnsStack",
-            "StackId": "arn:aws:cloudformation:eu-central-1:703466486373:stack/CdksnsStack/b0dc4710-c068-11eb-a6f5-0afe841876c0",
+            "StackId": "arn:aws:cloudformation:eu-central-1:111122225555:stack/CdksnsStack/b0dc4710-c068-11eb-a6f5-0afe841876c0",
             "LogicalResourceId": "MyTopic86869434",
-            "PhysicalResourceId": "arn:aws:sns:eu-central-1:703466486373:CdksnsStack-MyTopic86869434-8W2KJU1PQTX0",
+            "PhysicalResourceId": "arn:aws:sns:eu-central-1:111122225555:CdksnsStack-MyTopic86869434-8W2KJU1PQTX0",
             "ResourceType": "AWS::SNS::Topic",
             "Timestamp": "2021-05-29T10:29:24.338000+00:00",
             "ResourceStatus": "CREATE_COMPLETE",
@@ -26,7 +26,7 @@
         },
         {
             "StackName": "CdksnsStack",
-            "StackId": "arn:aws:cloudformation:eu-central-1:703466486373:stack/CdksnsStack/b0dc4710-c068-11eb-a6f5-0afe841876c0",
+            "StackId": "arn:aws:cloudformation:eu-central-1:111122225555:stack/CdksnsStack/b0dc4710-c068-11eb-a6f5-0afe841876c0",
             "LogicalResourceId": "snsid5E810D9E",
             "PhysicalResourceId": "/cit/test/snsid",
             "ResourceType": "AWS::SSM::Parameter",

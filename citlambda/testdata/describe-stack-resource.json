@@ -1,7 +1,7 @@
 {
     "StackResourceDetail": {
         "StackName": "LambdaSimpleStack",
-        "StackId": "arn:aws:cloudformation:eu-central-1:832282226273:stack/LambdaSimpleStack/e71688c0-c95c-11eb-b195-0a68dd1c0600",
+        "StackId": "arn:aws:cloudformation:eu-central-1:111122225555:stack/LambdaSimpleStack/e71688c0-c95c-11eb-b195-0a68dd1c0600",
         "LogicalResourceId": "HelloHandler2E4FBA4D",
         "PhysicalResourceId": "LambdaSimpleStack-HelloHandler2E4FBA4D-ZqznH9gomexC",
         "ResourceType": "AWS::Lambda::Function",

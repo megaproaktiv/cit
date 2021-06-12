@@ -1,7 +1,7 @@
 {
     "LoadBalancers": [
         {
-            "LoadBalancerArn": "arn:aws:elasticloadbalancing:eu-central-1:232969883625:loadbalancer/app/apilo-LB8A1-78MBV1RMGK89/c313d6e22a383039",
+            "LoadBalancerArn": "arn:aws:elasticloadbalancing:eu-central-1:111122225555:loadbalancer/app/apilo-LB8A1-78MBV1RMGK89/c313d6e22a383039",
             "DNSName": "apilo-LB8A1-78MBV1RMGK89-1949086566.eu-central-1.elb.amazonaws.com",
             "CanonicalHostedZoneId": "Z215JYRZR1TBD5",
             "CreatedTime": "2021-06-03T13:23:16.930000+00:00",
