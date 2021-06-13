@@ -17,6 +17,9 @@ type LambdaInterface interface {
 	GetFunction(ctx context.Context, 
 		params *lambda.GetFunctionInput, 
 		optFns ...func(*lambda.Options)) (*lambda.GetFunctionOutput, error)
+	Invoke(ctx context.Context, 
+		params *lambda.InvokeInput, 
+		optFns ...func(*lambda.Options)) (*lambda.InvokeOutput, error)	
 }
 
 func init() {

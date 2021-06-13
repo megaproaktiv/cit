@@ -15,22 +15,28 @@ var _ LambdaInterface = &LambdaInterfaceMock{}
 
 // LambdaInterfaceMock is a mock implementation of LambdaInterface.
 //
-//     func TestSomethingThatUsesLambdaInterface(t *testing.T) {
+// 	func TestSomethingThatUsesLambdaInterface(t *testing.T) {
 //
-//         // make and configure a mocked LambdaInterface
-//         mockedLambdaInterface := &LambdaInterfaceMock{
-//             GetFunctionFunc: func(ctx context.Context, params *lambda.GetFunctionInput, optFns ...func(*lambda.Options)) (*lambda.GetFunctionOutput, error) {
-// 	               panic("mock out the GetFunction method")
-//             },
-//         }
+// 		// make and configure a mocked LambdaInterface
+// 		mockedLambdaInterface := &LambdaInterfaceMock{
+// 			GetFunctionFunc: func(ctx context.Context, params *lambda.GetFunctionInput, optFns ...func(*lambda.Options)) (*lambda.GetFunctionOutput, error) {
+// 				panic("mock out the GetFunction method")
+// 			},
+// 			InvokeFunc: func(ctx context.Context, params *lambda.InvokeInput, optFns ...func(*lambda.Options)) (*lambda.InvokeOutput, error) {
+// 				panic("mock out the Invoke method")
+// 			},
+// 		}
 //
-//         // use mockedLambdaInterface in code that requires LambdaInterface
-//         // and then make assertions.
+// 		// use mockedLambdaInterface in code that requires LambdaInterface
+// 		// and then make assertions.
 //
-//     }
+// 	}
 type LambdaInterfaceMock struct {
 	// GetFunctionFunc mocks the GetFunction method.
 	GetFunctionFunc func(ctx context.Context, params *lambda.GetFunctionInput, optFns ...func(*lambda.Options)) (*lambda.GetFunctionOutput, error)
+
+	// InvokeFunc mocks the Invoke method.
+	InvokeFunc func(ctx context.Context, params *lambda.InvokeInput, optFns ...func(*lambda.Options)) (*lambda.InvokeOutput, error)
 
 	// calls tracks calls to the methods.
 	calls struct {
@@ -43,8 +49,18 @@ type LambdaInterfaceMock struct {
 			// OptFns is the optFns argument value.
 			OptFns []func(*lambda.Options)
 		}
+		// Invoke holds details about calls to the Invoke method.
+		Invoke []struct {
+			// Ctx is the ctx argument value.
+			Ctx context.Context
+			// Params is the params argument value.
+			Params *lambda.InvokeInput
+			// OptFns is the optFns argument value.
+			OptFns []func(*lambda.Options)
+		}
 	}
 	lockGetFunction sync.RWMutex
+	lockInvoke      sync.RWMutex
 }
 
 // GetFunction calls GetFunctionFunc.
@@ -83,5 +99,44 @@ func (mock *LambdaInterfaceMock) GetFunctionCalls() []struct {
 	mock.lockGetFunction.RLock()
 	calls = mock.calls.GetFunction
 	mock.lockGetFunction.RUnlock()
+	return calls
+}
+
+// Invoke calls InvokeFunc.
+func (mock *LambdaInterfaceMock) Invoke(ctx context.Context, params *lambda.InvokeInput, optFns ...func(*lambda.Options)) (*lambda.InvokeOutput, error) {
+	if mock.InvokeFunc == nil {
+		panic("LambdaInterfaceMock.InvokeFunc: method is nil but LambdaInterface.Invoke was just called")
+	}
+	callInfo := struct {
+		Ctx    context.Context
+		Params *lambda.InvokeInput
+		OptFns []func(*lambda.Options)
+	}{
+		Ctx:    ctx,
+		Params: params,
+		OptFns: optFns,
+	}
+	mock.lockInvoke.Lock()
+	mock.calls.Invoke = append(mock.calls.Invoke, callInfo)
+	mock.lockInvoke.Unlock()
+	return mock.InvokeFunc(ctx, params, optFns...)
+}
+
+// InvokeCalls gets all the calls that were made to Invoke.
+// Check the length with:
+//     len(mockedLambdaInterface.InvokeCalls())
+func (mock *LambdaInterfaceMock) InvokeCalls() []struct {
+	Ctx    context.Context
+	Params *lambda.InvokeInput
+	OptFns []func(*lambda.Options)
+} {
+	var calls []struct {
+		Ctx    context.Context
+		Params *lambda.InvokeInput
+		OptFns []func(*lambda.Options)
+	}
+	mock.lockInvoke.RLock()
+	calls = mock.calls.Invoke
+	mock.lockInvoke.RUnlock()
 	return calls
 }
