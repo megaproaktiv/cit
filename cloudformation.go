@@ -16,7 +16,7 @@ func init(){
 	}
 	CfnClient  = cloudformation.NewFromConfig(cfg)
 }
-//go:generate moq -out cloudformation_moq_test.go . CloudFormationInterface
+//go:generate moq -out cloudformation_moq.go . CloudFormationInterface
 
 type CloudFormationInterface interface {
 	GetTemplate(ctx context.Context, params *cloudformation.GetTemplateInput, optFns ...func(*cloudformation.Options)) (*cloudformation.GetTemplateOutput, error)

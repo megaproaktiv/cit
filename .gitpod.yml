@@ -1,0 +1,3 @@
+tasks:
+  - before: sh ./scripts/setup.sh
+

@@ -19,5 +19,4 @@ tasks:
   generate:
     desc: Go generation
     cmds: 
-      - go generate .
-      - go generate services/ses
+      - go generate ./...

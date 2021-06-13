@@ -1,0 +1,32 @@
+{
+    "Configuration": {
+        "FunctionName": "LambdaGoStack-HelloHandler2E4FBA4D-zkRMxExkikaq",
+        "FunctionArn": "arn:aws:lambda:eu-central-1:832282226273:function:LambdaGoStack-HelloHandler2E4FBA4D-zkRMxExkikaq",
+        "Runtime": "go1.x",
+        "Role": "arn:aws:iam::111122223333:role/LambdaGoStack-HelloHandlerServiceRole11EF7C63-Z2DWKIBM9ZTO",
+        "Handler": "main",
+        "CodeSize": 2355805,
+        "Description": "",
+        "Timeout": 3,
+        "MemorySize": 1024,
+        "LastModified": "2021-06-12T21:29:30.718+0000",
+        "CodeSha256": "Vf/N2DWX3+QYskE4iAz9MRXbUV3nY6+4ogYCuaC1FJA=",
+        "Version": "$LATEST",
+        "TracingConfig": {
+            "Mode": "PassThrough"
+        },
+        "RevisionId": "339dd0aa-3ebf-4f62-9d0b-f913bbfa8c98",
+        "State": "Active",
+        "LastUpdateStatus": "Successful",
+        "PackageType": "Zip"
+    },
+    "Code": {
+        "RepositoryType": "S3",
+        "Location": "https://awslambda-eu-cent-1-tasks.s3.eu-central-1.amazonaws.com/snapshots/111122223333/LambdaGoStack-HelloHandler2E4FBA4D-zkRMxExkikaq-5936694e-e9b8-450f-816e-7dbabd3d449c?versionId=waNlSUdGPXOf.lg_6xigmOIUUhEaJQY3&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEDQaDGV1LWNlbnRyYWwtMSJHMEUCIGWVwFl551RH%2F7BKYpBg065vlIQBoBmrouASk03OxDBFAiEA0zr3%2FWwI9eVIT4Ol4xajqkzAOR70NXzw%2FeXSeO9ftFIqiQQI7P%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FARADGgw2ODA2ODY1NTk0MzQiDOfGf48%2BR8epREv7AirdAzZZFS4Iwtc4oJTaIvV%2B%2FyXEZdlMUuayufB88vqkiERwszQI%2FNTp%2FI6%2BznlmMa23dQLzJZZ6S%2BhQ6BEW%2Bx9CUnE7TLqDQIEflZAc4fyBIiNuTvfwAX1bO%2Fzrge4JyOjiaFEJ%2BeWxRszOG7kXFKu%2Bb%2BtpHgOp%2FcluzgpMnxmn9hvrd8Fv0zAWTZ3fLFpti2q71Zy2CxRepDvqYWlZxhg23jXO8njoTeeo%2FgkDttd1mBZCZzVJ8jNhdPLIPkZS2owjpfOnxtdyblOEkpx9eVIdwMYm89gt%2Fzsx2VoUCByvdqJ3312hBNfJtbjd%2F%2FzKVgyOBP9632pq6oxiwXtPouUJwBRSE0laPhtFvKvqQatzz%2BqU5MiHWgJ1q%2BcAeCfxeoKOMc6fvZ%2ByJppcU4UgUpcUSP8melm3wXWZ2LWdrQ4yNS1lwTl0ySiI3xfqF3qybaKTBJWIM1kKe6MQNqd%2BZ%2BdN23VGsq%2BMEANlF0NyjzAICxpxg8tTOxiFgrGJysWOD6maFz4B6m987JixOhR6mHapsKEqwf%2BhNiFSXqBKY2BB3L5FnnKBxjrSIloWYjRNY70qG70hTjqyQIvFuRgmypEA1hGi%2F8ot3A%2BsfMWvejW5ErMyX6DRaZI3A9rSJPKpETC%2B2peGBjqlAd0AHoWCnaEGk%2BwmEe4oAROIvlnz2ufZqVBfsQNrojGkduyCxrpkJtyRO2NyIfJmyqzYQCoC1pbBxk%2B8zflCZURevHeVE2IYUfFUbvpXqqNTPSdMF8C5IMBW9JKPdE9OLAzbes6KIISaEApUFQVVk07UQTuRt5s8UJSzOnwhK13Ib6hkbrAL%2F4%2FAp5E75gesK2cEnGP9suduuFMz9X9uG%2B6XQQUzwA%3D%3D&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20210613T114830Z&X-Amz-SignedHeaders=host&X-Amz-Expires=600&X-Amz-Credential=ASIAZ47AUUDFA2JXD555%2F20210613%2Feu-central-1%2Fs3%2Faws4_request&X-Amz-Signature=a5410ee3cf001d6b3d001d1dff592741da8ba03edbe42d75b17c64c18c8b835d"
+    },
+    "Tags": {
+        "aws:cloudformation:stack-name": "LambdaGoStack",
+        "aws:cloudformation:stack-id": "arn:aws:cloudformation:eu-central-1:111122223333:stack/LambdaGoStack/415019e0-cbc0-11eb-87fb-0afa42066474",
+        "aws:cloudformation:logical-id": "HelloHandler2E4FBA4D"
+    }
+}

@@ -33,7 +33,9 @@ func InvokeFunction(stackname *string, constructID *string, eventFile *string)( 
 		Payload:        data,
 	}
 	res, err := client.Invoke(context.TODO(), params)
-
+	if err != nil {
+		return nil, err
+	}
 	responseString := string(res.Payload)
 	return &responseString, nil
 }

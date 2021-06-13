@@ -11,7 +11,7 @@ import (
 )
 
 var client LambdaInterface
-//go:generate moq -out lambda_moq_test.go . LambdaInterface
+//go:generate moq -out lambda_moq.go . LambdaInterface
 
 type LambdaInterface interface {
 	GetFunction(ctx context.Context, 

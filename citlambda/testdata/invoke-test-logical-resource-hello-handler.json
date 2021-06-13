@@ -1,0 +1,15 @@
+{
+    "StackResourceDetail": {
+        "StackName": "LambdaGoStack",
+        "StackId": "arn:aws:cloudformation:eu-central-1:111222333444:stack/LambdaGoStack/415019e0-cbc0-11eb-87fb-0afa42066474",
+        "LogicalResourceId": "HelloHandler2E4FBA4D",
+        "PhysicalResourceId": "LambdaGoStack-HelloHandler2E4FBA4D-zkRMxExkikaq",
+        "ResourceType": "AWS::Lambda::Function",
+        "LastUpdatedTimestamp": "2021-06-12T21:29:31.621000+00:00",
+        "ResourceStatus": "UPDATE_COMPLETE",
+        "Metadata": "{\"aws:asset:property\":\"Code\",\"aws:asset:path\":\"asset.sss.zip\",\"aws:cdk:path\":\"LambdaGoStack/HelloHandler/Resource\"}",
+        "DriftInformation": {
+            "StackResourceDriftStatus": "NOT_CHECKED"
+        }
+    }
+}

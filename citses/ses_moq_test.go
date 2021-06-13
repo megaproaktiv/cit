@@ -15,19 +15,19 @@ var _ SesInterface = &SesInterfaceMock{}
 
 // SesInterfaceMock is a mock implementation of SesInterface.
 //
-//     func TestSomethingThatUsesSesInterface(t *testing.T) {
+// 	func TestSomethingThatUsesSesInterface(t *testing.T) {
 //
-//         // make and configure a mocked SesInterface
-//         mockedSesInterface := &SesInterfaceMock{
-//             ListIdentitiesFunc: func(ctx context.Context, params *ses.ListIdentitiesInput, optFns ...func(*ses.Options)) (*ses.ListIdentitiesOutput, error) {
-// 	               panic("mock out the ListIdentities method")
-//             },
-//         }
+// 		// make and configure a mocked SesInterface
+// 		mockedSesInterface := &SesInterfaceMock{
+// 			ListIdentitiesFunc: func(ctx context.Context, params *ses.ListIdentitiesInput, optFns ...func(*ses.Options)) (*ses.ListIdentitiesOutput, error) {
+// 				panic("mock out the ListIdentities method")
+// 			},
+// 		}
 //
-//         // use mockedSesInterface in code that requires SesInterface
-//         // and then make assertions.
+// 		// use mockedSesInterface in code that requires SesInterface
+// 		// and then make assertions.
 //
-//     }
+// 	}
 type SesInterfaceMock struct {
 	// ListIdentitiesFunc mocks the ListIdentities method.
 	ListIdentitiesFunc func(ctx context.Context, params *ses.ListIdentitiesInput, optFns ...func(*ses.Options)) (*ses.ListIdentitiesOutput, error)
