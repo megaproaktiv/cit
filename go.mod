@@ -13,6 +13,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/ses v1.3.1
 	github.com/aws/aws-sdk-go-v2/service/sts v1.4.1
 	github.com/kr/pretty v0.2.0 // indirect
+	github.com/mitchellh/mapstructure v1.4.1 // indirect
 	github.com/sirupsen/logrus v1.8.1
 	github.com/stretchr/testify v1.7.0
 	golang.org/x/sys v0.0.0-20200930185726-fdedc70b468f // indirect

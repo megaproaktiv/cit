@@ -3,7 +3,7 @@ package citlambda
 import (
 	"context"
 	"encoding/json"
-	"io/ioutil"
+	"fmt"
 	"os"
 
 	"testing"
@@ -15,14 +15,27 @@ import (
 	"github.com/stretchr/testify/assert"
 
 	"github.com/megaproaktiv/cit"
+	// "github.com/mitchellh/mapstructure"
 )
+
+// func (gt *cloudformation.GetTemplateOutput) UnmarshalJSON(data []byte) (err error) {
+//     var result map[string]interface{}
+//     err = json.Unmarshal(data, &result)
+//     keys := reflect.ValueOf(result).MapKeys()
+//     for _, item := range keys {
+//         fmt.Print(item)
+// 		ii := item.Interface().(string)
+// 		gt.TemplateBody = &ii
+//     }
+//     return
+// }
 
 func TestGetFunctionConfiguration(t *testing.T) {
 	
 	mockedLambdaInterface := &LambdaInterfaceMock{
 		GetFunctionFunc: func(ctx context.Context, params *lambda.GetFunctionInput, optFns ...func(*lambda.Options)) (*lambda.GetFunctionOutput, error) {
 			var output lambda.GetFunctionOutput
-			data, err := ioutil.ReadFile("testdata/get-function-positive.json")
+			data, err := os.ReadFile("testdata/get-function-positive.json")
 			if err != nil {
 				t.Error("Cant read input testdata")
 				t.Error(err)
@@ -32,23 +45,37 @@ func TestGetFunctionConfiguration(t *testing.T) {
 		},
 	}
 	
+	
 	mockedCloudFormationInterface := &cit.CloudFormationInterfaceMock{
 		DescribeStackResourceFunc: func(ctx context.Context, 
 			params *cloudformation.DescribeStackResourceInput, 
 			optFns ...func(*cloudformation.Options)) (*cloudformation.DescribeStackResourceOutput, error) {
 				var output cloudformation.DescribeStackResourceOutput
-				data, err := ioutil.ReadFile("testdata/describe-stack-resource.json")
+				data, err := os.ReadFile("testdata/describe-stack-resource.json")
 				if err != nil {
 					t.Error("Cant read input testdata")
 					t.Error(err)
 				}
 				json.Unmarshal(data, &output);
 				return &output,nil
-		},
-		GetTemplateFunc: func(ctx context.Context, 
-			params *cloudformation.GetTemplateInput, 
-			optFns ...func(*cloudformation.Options)) (*cloudformation.GetTemplateOutput, error) {
-				panic("mock out the GetTemplate method")
+			},
+			GetTemplateFunc: func(ctx context.Context, 
+				params *cloudformation.GetTemplateInput, 
+				optFns ...func(*cloudformation.Options)) (*cloudformation.GetTemplateOutput, error) {
+				output := &cloudformation.GetTemplateOutput{}
+				preStage := &cit.SimpleCfn{}
+				data, err := os.ReadFile("testdata/get-template.json")
+				if err != nil {
+					t.Error("Cant read input testdata - template")
+					t.Error(err)
+				}
+				// dynamic := make(map[string]interface{})
+				// json.Unmarshal(data,&dynamic)
+
+				json.Unmarshal(data,&preStage)
+				fmt.Print()
+			
+				return output, nil
 		},
 	}
 
