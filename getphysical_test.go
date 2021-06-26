@@ -10,7 +10,7 @@ import (
 	aws "github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/cloudformation"
 	"github.com/megaproaktiv/cit"
-	"github.com/stretchr/testify/assert"
+	"gotest.tools/assert"
 )
 
 // Deploy testData stack before

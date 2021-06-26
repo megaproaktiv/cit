@@ -8,6 +8,10 @@ import (
 
 var CfnClient CloudFormationInterface
 
+type SimpleCfn struct {
+	StagesAvailable []string `json:"StagesAvailable"`
+	TemplateBody    string   `json:"TemplateBody"`
+}
 
 func init(){
 	cfg, err := config.LoadDefaultConfig(context.TODO())
@@ -16,7 +20,7 @@ func init(){
 	}
 	CfnClient  = cloudformation.NewFromConfig(cfg)
 }
-//go:generate moq -out cloudformation_moq.go . CloudFormationInterface
+//go:generate moq -out cloudformation_moq.go -pkg cit . CloudFormationInterface
 
 type CloudFormationInterface interface {
 	GetTemplate(ctx context.Context, params *cloudformation.GetTemplateInput, optFns ...func(*cloudformation.Options)) (*cloudformation.GetTemplateOutput, error)
