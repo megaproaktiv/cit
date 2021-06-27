@@ -7,9 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 ### Added
 
+## [0.1.14]
+### Added
+- Lambda invoke test fixed
+
 ## [0.1.13]
 ### Added
 - Lambda invoke for getting response jsons directly from json files
+
 ## [0.1.12]
 ### Added
 - Lambda with mocked Cfn and lambda client

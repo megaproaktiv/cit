@@ -31,7 +31,7 @@ func TestInvokeFunction(t *testing.T) {
 				}
 				content := string(data)
 				templateOutput.TemplateBody = &content
-				// t.Log("Resources: ",*templateOutput.TemplateBody)
+				//t.Log("Resources: ",*templateOutput.TemplateBody)
 				return &templateOutput, nil
 		},
 		DescribeStackResourceFunc: func(ctx context.Context, 
@@ -44,6 +44,7 @@ func TestInvokeFunction(t *testing.T) {
 					t.Error(err)
 				}
 				json.Unmarshal(data, &output);
+				t.Log("DescribeStackResourceFunc: ",output)
 				return &output,nil
 		},
 	}
@@ -62,17 +63,17 @@ func TestInvokeFunction(t *testing.T) {
 		},
 		InvokeFunc: func(ctx context.Context, params *lambda.InvokeInput, optFns ...func(*lambda.Options)) (*lambda.InvokeOutput, error) {
 			var output lambda.InvokeOutput
-			output.Payload = []byte("done")
+			output.Payload = []byte("Done")
 			return &output,nil
 
 		},
 	}
 	os.Setenv("AUTO_INIT", "false")
 	citlambda.SetClient(mockedLambdaInterface)
-	eventFileName := "citlambda/testdata/test-event.json"
+	eventFileName := "./testdata/invoke-test-event.json"
 	got, err := citlambda.InvokeFunction( aws.String("LambdaGoStack"), aws.String("HelloHandler"), &eventFileName)
 	assert.NilError(t, err)
 	want := "Done"
-	assert.Equal(t, want, got)
+	assert.Equal(t, want, *got)
 			
 }
