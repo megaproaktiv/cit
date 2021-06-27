@@ -49,7 +49,7 @@ func TestPhysicalID(t *testing.T) {
 		aws.String("CdksnsStack"), 
 		aws.String("MyTopic"))
 	expectedPhid := "arn:aws:sns:eu-central-1:111122225555:CdksnsStack-MyTopic86869434-8W2KJU1PQTX0"
-	assert.Nil(t, err, "PhysicalIDfromCID should give no error" )
+	assert.NilError(t, err, "PhysicalIDfromCID should give no error" )
 	assert.Equal(t, expectedPhid, *actualPhid, "PhysicalID should match ConstructID")
 
 }
@@ -62,7 +62,7 @@ func TestLogicalIDfromCID(t *testing.T) {
 	}
 	content := string(data)
 	logicalID,err := cit.LogicalIDfromCID(&content, aws.String("MyTopic"))
-	assert.Nil(t, err, "LogicalIDfromCID should return no error")
+	assert.NilError(t, err, "LogicalIDfromCID should return no error")
 	if err != nil{
 		t.Fatal(err)
 	}
@@ -85,7 +85,7 @@ func TestMarshallTemplate(t *testing.T){
 	if err != nil {
 		t.Error(err)
 	}
-	assert.Nil(t, err, "Unmarshal should work wo errors")
+	assert.NilError(t, err, "Unmarshal should work wo errors")
 
 	logicalName := "MyTopic86869434"
 	for key := range stack.Resources { 

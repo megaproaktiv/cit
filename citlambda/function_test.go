@@ -40,8 +40,11 @@ func TestGetFunctionConfiguration(t *testing.T) {
 				t.Error("Cant read input testdata")
 				t.Error(err)
 			}
-			json.Unmarshal(data, &output);
-			return &output,nil
+			json.Unmarshal(data, &output)
+			return &output, nil
+		},
+		InvokeFunc: func(ctx context.Context, params *lambda.InvokeInput, optFns ...func(*lambda.Options)) (*lambda.InvokeOutput, error) {
+			panic("Not implemented")
 		},
 	}
 	
@@ -51,7 +54,7 @@ func TestGetFunctionConfiguration(t *testing.T) {
 			params *cloudformation.DescribeStackResourceInput, 
 			optFns ...func(*cloudformation.Options)) (*cloudformation.DescribeStackResourceOutput, error) {
 				var output cloudformation.DescribeStackResourceOutput
-				data, err := os.ReadFile("testdata/describe-stack-resource.json")
+				data, err := os.ReadFile("testdata/function-test-describe-stack-resource.json")
 				if err != nil {
 					t.Error("Cant read input testdata")
 					t.Error(err)
@@ -84,7 +87,7 @@ func TestGetFunctionConfiguration(t *testing.T) {
 	cit.SetClient(mockedCloudFormationInterface)
 	
 	got, err := citlambda.GetFunctionConfiguration(aws.String("LambdaSimpleStack"), aws.String("HelloHandler"))
-	assert.Nil(t, err, "GetFunction should return no error")
+	assert.NilError(t, err, "GetFunction should return no error")
 	expect := &types.FunctionConfiguration{
 		FunctionName:               aws.String("LambdaSimpleStack-HelloHandler2E4FBA4D-ZqznH9gomexC"),
 		Handler:                    aws.String("hello.handler"),

@@ -1,308 +1,304 @@
 {
-    "TemplateBody": {
-        "Resources": {
-            "HelloHandlerServiceRole11EF7C63": {
-                "Type": "AWS::IAM::Role",
-                "Properties": {
-                    "AssumeRolePolicyDocument": {
-                        "Statement": [
-                            {
-                                "Action": "sts:AssumeRole",
-                                "Effect": "Allow",
-                                "Principal": {
-                                    "Service": "lambda.amazonaws.com"
-                                }
-                            }
-                        ],
-                        "Version": "2012-10-17"
-                    },
-                    "ManagedPolicyArns": [
+
+    "Resources": {
+        "HelloHandlerServiceRole11EF7C63": {
+            "Type": "AWS::IAM::Role",
+            "Properties": {
+                "AssumeRolePolicyDocument": {
+                    "Statement": [
                         {
-                            "Fn::Join": [
-                                "",
-                                [
-                                    "arn:",
-                                    {
-                                        "Ref": "AWS::Partition"
-                                    },
-                                    ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
-                                ]
+                            "Action": "sts:AssumeRole",
+                            "Effect": "Allow",
+                            "Principal": {
+                                "Service": "lambda.amazonaws.com"
+                            }
+                        }
+                    ],
+                    "Version": "2012-10-17"
+                },
+                "ManagedPolicyArns": [
+                    {
+                        "Fn::Join": [
+                            "",
+                            [
+                                "arn:",
+                                {
+                                    "Ref": "AWS::Partition"
+                                },
+                                ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+                            ]
+                        ]
+                    }
+                ]
+            },
+            "Metadata": {
+                "aws:cdk:path": "LambdaSimpleStack/HelloHandler/ServiceRole/Resource"
+            }
+        },
+        "HelloHandler2E4FBA4D": {
+            "Type": "AWS::Lambda::Function",
+            "Properties": {
+                "Code": {
+                    "S3Bucket": {
+                        "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
+                    },
+                    "S3Key": "a01c559c630927e9eb099ca8bbfeefab275803084f45afc49df016a266708df5.zip"
+                },
+                "Role": {
+                    "Fn::GetAtt": [
+                        "HelloHandlerServiceRole11EF7C63",
+                        "Arn"
+                    ]
+                },
+                "Handler": "hello.handler",
+                "MemorySize": 1024,
+                "Runtime": "nodejs14.x"
+            },
+            "DependsOn": [
+                "HelloHandlerServiceRole11EF7C63"
+            ],
+            "Metadata": {
+                "aws:cdk:path": "LambdaSimpleStack/HelloHandler/Resource",
+                "aws:asset:path": "asset.a01c559c630927e9eb099ca8bbfeefab275803084f45afc49df016a266708df5",
+                "aws:asset:property": "Code"
+            }
+        },
+        "CDKMetadata": {
+            "Type": "AWS::CDK::Metadata",
+            "Properties": {
+                "Analytics": "v2:deflate64:H4sIAAAAAAAAE02MTQqDMBBGz+I+GbU/dl2EHiA9gIxJKlPNBJKIi+Ddq5VCV+/x8fFOUEElg4ZbgUuU2oxyoh7yM6EexTZ1eULXG4T8mFkn8izaF/98FYQOsvKT3eedq4jnDmO0KcJ9xyq+2IoD8SCUjX4O+vj/eevZ0NEcfA11A9fSYFiIS3SmuRTvSCTDzImcBXXwA77I2pu/AAAA"
+            },
+            "Metadata": {
+                "aws:cdk:path": "LambdaSimpleStack/CDKMetadata/Default"
+            },
+            "Condition": "CDKMetadataAvailable"
+        }
+    },
+    "Conditions": {
+        "CDKMetadataAvailable": {
+            "Fn::Or": [
+                {
+                    "Fn::Or": [
+                        {
+                            "Fn::Equals": [
+                                {
+                                    "Ref": "AWS::Region"
+                                },
+                                "af-south-1"
+                            ]
+                        },
+                        {
+                            "Fn::Equals": [
+                                {
+                                    "Ref": "AWS::Region"
+                                },
+                                "ap-east-1"
+                            ]
+                        },
+                        {
+                            "Fn::Equals": [
+                                {
+                                    "Ref": "AWS::Region"
+                                },
+                                "ap-northeast-1"
+                            ]
+                        },
+                        {
+                            "Fn::Equals": [
+                                {
+                                    "Ref": "AWS::Region"
+                                },
+                                "ap-northeast-2"
+                            ]
+                        },
+                        {
+                            "Fn::Equals": [
+                                {
+                                    "Ref": "AWS::Region"
+                                },
+                                "ap-south-1"
+                            ]
+                        },
+                        {
+                            "Fn::Equals": [
+                                {
+                                    "Ref": "AWS::Region"
+                                },
+                                "ap-southeast-1"
+                            ]
+                        },
+                        {
+                            "Fn::Equals": [
+                                {
+                                    "Ref": "AWS::Region"
+                                },
+                                "ap-southeast-2"
+                            ]
+                        },
+                        {
+                            "Fn::Equals": [
+                                {
+                                    "Ref": "AWS::Region"
+                                },
+                                "ca-central-1"
+                            ]
+                        },
+                        {
+                            "Fn::Equals": [
+                                {
+                                    "Ref": "AWS::Region"
+                                },
+                                "cn-north-1"
+                            ]
+                        },
+                        {
+                            "Fn::Equals": [
+                                {
+                                    "Ref": "AWS::Region"
+                                },
+                                "cn-northwest-1"
                             ]
                         }
                     ]
                 },
-                "Metadata": {
-                    "aws:cdk:path": "LambdaSimpleStack/HelloHandler/ServiceRole/Resource"
-                }
-            },
-            "HelloHandler2E4FBA4D": {
-                "Type": "AWS::Lambda::Function",
-                "Properties": {
-                    "Code": {
-                        "S3Bucket": {
-                            "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
-                        },
-                        "S3Key": "a01c559c630927e9eb099ca8bbfeefab275803084f45afc49df016a266708df5.zip"
-                    },
-                    "Role": {
-                        "Fn::GetAtt": [
-                            "HelloHandlerServiceRole11EF7C63",
-                            "Arn"
-                        ]
-                    },
-                    "Handler": "hello.handler",
-                    "MemorySize": 1024,
-                    "Runtime": "nodejs14.x"
-                },
-                "DependsOn": [
-                    "HelloHandlerServiceRole11EF7C63"
-                ],
-                "Metadata": {
-                    "aws:cdk:path": "LambdaSimpleStack/HelloHandler/Resource",
-                    "aws:asset:path": "asset.a01c559c630927e9eb099ca8bbfeefab275803084f45afc49df016a266708df5",
-                    "aws:asset:property": "Code"
-                }
-            },
-            "CDKMetadata": {
-                "Type": "AWS::CDK::Metadata",
-                "Properties": {
-                    "Analytics": "v2:deflate64:H4sIAAAAAAAAE02MTQqDMBBGz+I+GbU/dl2EHiA9gIxJKlPNBJKIi+Ddq5VCV+/x8fFOUEElg4ZbgUuU2oxyoh7yM6EexTZ1eULXG4T8mFkn8izaF/98FYQOsvKT3eedq4jnDmO0KcJ9xyq+2IoD8SCUjX4O+vj/eevZ0NEcfA11A9fSYFiIS3SmuRTvSCTDzImcBXXwA77I2pu/AAAA"
-                },
-                "Metadata": {
-                    "aws:cdk:path": "LambdaSimpleStack/CDKMetadata/Default"
-                },
-                "Condition": "CDKMetadataAvailable"
-            }
-        },
-        "Conditions": {
-            "CDKMetadataAvailable": {
-                "Fn::Or": [
-                    {
-                        "Fn::Or": [
-                            {
-                                "Fn::Equals": [
-                                    {
-                                        "Ref": "AWS::Region"
-                                    },
-                                    "af-south-1"
-                                ]
-                            },
-                            {
-                                "Fn::Equals": [
-                                    {
-                                        "Ref": "AWS::Region"
-                                    },
-                                    "ap-east-1"
-                                ]
-                            },
-                            {
-                                "Fn::Equals": [
-                                    {
-                                        "Ref": "AWS::Region"
-                                    },
-                                    "ap-northeast-1"
-                                ]
-                            },
-                            {
-                                "Fn::Equals": [
-                                    {
-                                        "Ref": "AWS::Region"
-                                    },
-                                    "ap-northeast-2"
-                                ]
-                            },
-                            {
-                                "Fn::Equals": [
-                                    {
-                                        "Ref": "AWS::Region"
-                                    },
-                                    "ap-south-1"
-                                ]
-                            },
-                            {
-                                "Fn::Equals": [
-                                    {
-                                        "Ref": "AWS::Region"
-                                    },
-                                    "ap-southeast-1"
-                                ]
-                            },
-                            {
-                                "Fn::Equals": [
-                                    {
-                                        "Ref": "AWS::Region"
-                                    },
-                                    "ap-southeast-2"
-                                ]
-                            },
-                            {
-                                "Fn::Equals": [
-                                    {
-                                        "Ref": "AWS::Region"
-                                    },
-                                    "ca-central-1"
-                                ]
-                            },
-                            {
-                                "Fn::Equals": [
-                                    {
-                                        "Ref": "AWS::Region"
-                                    },
-                                    "cn-north-1"
-                                ]
-                            },
-                            {
-                                "Fn::Equals": [
-                                    {
-                                        "Ref": "AWS::Region"
-                                    },
-                                    "cn-northwest-1"
-                                ]
-                            }
-                        ]
-                    },
-                    {
-                        "Fn::Or": [
-                            {
-                                "Fn::Equals": [
-                                    {
-                                        "Ref": "AWS::Region"
-                                    },
-                                    "eu-central-1"
-                                ]
-                            },
-                            {
-                                "Fn::Equals": [
-                                    {
-                                        "Ref": "AWS::Region"
-                                    },
-                                    "eu-north-1"
-                                ]
-                            },
-                            {
-                                "Fn::Equals": [
-                                    {
-                                        "Ref": "AWS::Region"
-                                    },
-                                    "eu-south-1"
-                                ]
-                            },
-                            {
-                                "Fn::Equals": [
-                                    {
-                                        "Ref": "AWS::Region"
-                                    },
-                                    "eu-west-1"
-                                ]
-                            },
-                            {
-                                "Fn::Equals": [
-                                    {
-                                        "Ref": "AWS::Region"
-                                    },
-                                    "eu-west-2"
-                                ]
-                            },
-                            {
-                                "Fn::Equals": [
-                                    {
-                                        "Ref": "AWS::Region"
-                                    },
-                                    "eu-west-3"
-                                ]
-                            },
-                            {
-                                "Fn::Equals": [
-                                    {
-                                        "Ref": "AWS::Region"
-                                    },
-                                    "me-south-1"
-                                ]
-                            },
-                            {
-                                "Fn::Equals": [
-                                    {
-                                        "Ref": "AWS::Region"
-                                    },
-                                    "sa-east-1"
-                                ]
-                            },
-                            {
-                                "Fn::Equals": [
-                                    {
-                                        "Ref": "AWS::Region"
-                                    },
-                                    "us-east-1"
-                                ]
-                            },
-                            {
-                                "Fn::Equals": [
-                                    {
-                                        "Ref": "AWS::Region"
-                                    },
-                                    "us-east-2"
-                                ]
-                            }
-                        ]
-                    },
-                    {
-                        "Fn::Or": [
-                            {
-                                "Fn::Equals": [
-                                    {
-                                        "Ref": "AWS::Region"
-                                    },
-                                    "us-west-1"
-                                ]
-                            },
-                            {
-                                "Fn::Equals": [
-                                    {
-                                        "Ref": "AWS::Region"
-                                    },
-                                    "us-west-2"
-                                ]
-                            }
-                        ]
-                    }
-                ]
-            }
-        },
-        "Parameters": {
-            "BootstrapVersion": {
-                "Type": "AWS::SSM::Parameter::Value<String>",
-                "Default": "/cdk-bootstrap/hnb659fds/version",
-                "Description": "Version of the CDK Bootstrap resources in this environment, automatically retrieved from SSM Parameter Store."
-            }
-        },
-        "Rules": {
-            "CheckBootstrapVersion": {
-                "Assertions": [
-                    {
-                        "Assert": {
-                            "Fn::Not": [
+                {
+                    "Fn::Or": [
+                        {
+                            "Fn::Equals": [
                                 {
-                                    "Fn::Contains": [
-                                        [
-                                            "1",
-                                            "2",
-                                            "3"
-                                        ],
-                                        {
-                                            "Ref": "BootstrapVersion"
-                                        }
-                                    ]
-                                }
+                                    "Ref": "AWS::Region"
+                                },
+                                "eu-central-1"
                             ]
                         },
-                        "AssertDescription": "CDK bootstrap stack version 4 required. Please run 'cdk bootstrap' with a recent version of the CDK CLI."
-                    }
-                ]
-            }
+                        {
+                            "Fn::Equals": [
+                                {
+                                    "Ref": "AWS::Region"
+                                },
+                                "eu-north-1"
+                            ]
+                        },
+                        {
+                            "Fn::Equals": [
+                                {
+                                    "Ref": "AWS::Region"
+                                },
+                                "eu-south-1"
+                            ]
+                        },
+                        {
+                            "Fn::Equals": [
+                                {
+                                    "Ref": "AWS::Region"
+                                },
+                                "eu-west-1"
+                            ]
+                        },
+                        {
+                            "Fn::Equals": [
+                                {
+                                    "Ref": "AWS::Region"
+                                },
+                                "eu-west-2"
+                            ]
+                        },
+                        {
+                            "Fn::Equals": [
+                                {
+                                    "Ref": "AWS::Region"
+                                },
+                                "eu-west-3"
+                            ]
+                        },
+                        {
+                            "Fn::Equals": [
+                                {
+                                    "Ref": "AWS::Region"
+                                },
+                                "me-south-1"
+                            ]
+                        },
+                        {
+                            "Fn::Equals": [
+                                {
+                                    "Ref": "AWS::Region"
+                                },
+                                "sa-east-1"
+                            ]
+                        },
+                        {
+                            "Fn::Equals": [
+                                {
+                                    "Ref": "AWS::Region"
+                                },
+                                "us-east-1"
+                            ]
+                        },
+                        {
+                            "Fn::Equals": [
+                                {
+                                    "Ref": "AWS::Region"
+                                },
+                                "us-east-2"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "Fn::Or": [
+                        {
+                            "Fn::Equals": [
+                                {
+                                    "Ref": "AWS::Region"
+                                },
+                                "us-west-1"
+                            ]
+                        },
+                        {
+                            "Fn::Equals": [
+                                {
+                                    "Ref": "AWS::Region"
+                                },
+                                "us-west-2"
+                            ]
+                        }
+                    ]
+                }
+            ]
         }
     },
-    "StagesAvailable": [
-        "Original",
-        "Processed"
-    ]
+    "Parameters": {
+        "BootstrapVersion": {
+            "Type": "AWS::SSM::Parameter::Value<String>",
+            "Default": "/cdk-bootstrap/hnb659fds/version",
+            "Description": "Version of the CDK Bootstrap resources in this environment, automatically retrieved from SSM Parameter Store."
+        }
+    },
+    "Rules": {
+        "CheckBootstrapVersion": {
+            "Assertions": [
+                {
+                    "Assert": {
+                        "Fn::Not": [
+                            {
+                                "Fn::Contains": [
+                                    [
+                                        "1",
+                                        "2",
+                                        "3"
+                                    ],
+                                    {
+                                        "Ref": "BootstrapVersion"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    "AssertDescription": "CDK bootstrap stack version 4 required. Please run 'cdk bootstrap' with a recent version of the CDK CLI."
+                }
+            ]
+        }
+    }
+
 }

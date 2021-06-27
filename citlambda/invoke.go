@@ -38,8 +38,4 @@ func InvokeFunction(stackname *string, constructID *string, eventFile *string)( 
 	}
 	responseString := string(res.Payload)
 	return &responseString, nil
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> 87e5abe (get nvoke from main)
