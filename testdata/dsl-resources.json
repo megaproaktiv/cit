@@ -1,0 +1,220 @@
+{
+    "StackResources": [
+        {
+            "StackName": "dsl",
+            "StackId": "arn:aws:cloudformation:eu-central-1:669453403305:stack/dsl/8af29270-5a96-11ec-b42d-063a265415c8",
+            "LogicalResourceId": "BucketNotificationsHandler050a0587b7544547bf325f094a3db8347ECC3691",
+            "PhysicalResourceId": "dsl-BucketNotificationsHandler050a0587b7544547bf32-PPamhj33lANd",
+            "ResourceType": "AWS::Lambda::Function",
+            "Timestamp": "2021-12-11T15:26:40.398000+00:00",
+            "ResourceStatus": "CREATE_COMPLETE",
+            "DriftInformation": {
+                "StackResourceDriftStatus": "NOT_CHECKED"
+            }
+        },
+        {
+            "StackName": "dsl",
+            "StackId": "arn:aws:cloudformation:eu-central-1:669453403305:stack/dsl/8af29270-5a96-11ec-b42d-063a265415c8",
+            "LogicalResourceId": "BucketNotificationsHandler050a0587b7544547bf325f094a3db834RoleB6FB88EC",
+            "PhysicalResourceId": "dsl-BucketNotificationsHandler050a0587b7544547bf32-KCOURZDGM5O6",
+            "ResourceType": "AWS::IAM::Role",
+            "Timestamp": "2021-12-11T15:26:12.373000+00:00",
+            "ResourceStatus": "CREATE_COMPLETE",
+            "DriftInformation": {
+                "StackResourceDriftStatus": "NOT_CHECKED"
+            }
+        },
+        {
+            "StackName": "dsl",
+            "StackId": "arn:aws:cloudformation:eu-central-1:669453403305:stack/dsl/8af29270-5a96-11ec-b42d-063a265415c8",
+            "LogicalResourceId": "BucketNotificationsHandler050a0587b7544547bf325f094a3db834RoleDefaultPolicy2CF63D36",
+            "PhysicalResourceId": "dsl-Bucket-17YY5TPLCHK9M",
+            "ResourceType": "AWS::IAM::Policy",
+            "Timestamp": "2021-12-11T15:26:28.894000+00:00",
+            "ResourceStatus": "CREATE_COMPLETE",
+            "DriftInformation": {
+                "StackResourceDriftStatus": "NOT_CHECKED"
+            }
+        },
+        {
+            "StackName": "dsl",
+            "StackId": "arn:aws:cloudformation:eu-central-1:669453403305:stack/dsl/8af29270-5a96-11ec-b42d-063a265415c8",
+            "LogicalResourceId": "CDKMetadata",
+            "PhysicalResourceId": "8af29270-5a96-11ec-b42d-063a265415c8",
+            "ResourceType": "AWS::CDK::Metadata",
+            "Timestamp": "2021-12-11T15:25:59.459000+00:00",
+            "ResourceStatus": "CREATE_COMPLETE",
+            "DriftInformation": {
+                "StackResourceDriftStatus": "NOT_CHECKED"
+            }
+        },
+        {
+            "StackName": "dsl",
+            "StackId": "arn:aws:cloudformation:eu-central-1:669453403305:stack/dsl/8af29270-5a96-11ec-b42d-063a265415c8",
+            "LogicalResourceId": "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aFD4BFC8A",
+            "PhysicalResourceId": "dsl-LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aFD-nzSTDxcS1Joq",
+            "ResourceType": "AWS::Lambda::Function",
+            "Timestamp": "2021-12-11T15:31:02.287000+00:00",
+            "ResourceStatus": "UPDATE_COMPLETE",
+            "DriftInformation": {
+                "StackResourceDriftStatus": "NOT_CHECKED"
+            }
+        },
+        {
+            "StackName": "dsl",
+            "StackId": "arn:aws:cloudformation:eu-central-1:669453403305:stack/dsl/8af29270-5a96-11ec-b42d-063a265415c8",
+            "LogicalResourceId": "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aServiceRole9741ECFB",
+            "PhysicalResourceId": "dsl-LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aSe-1UR3KTF2YJR2J",
+            "ResourceType": "AWS::IAM::Role",
+            "Timestamp": "2021-12-11T15:26:12.581000+00:00",
+            "ResourceStatus": "CREATE_COMPLETE",
+            "DriftInformation": {
+                "StackResourceDriftStatus": "NOT_CHECKED"
+            }
+        },
+        {
+            "StackName": "dsl",
+            "StackId": "arn:aws:cloudformation:eu-central-1:669453403305:stack/dsl/8af29270-5a96-11ec-b42d-063a265415c8",
+            "LogicalResourceId": "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aServiceRoleDefaultPolicyADDA7DEB",
+            "PhysicalResourceId": "dsl-LogRet-DTNH9JWYW76",
+            "ResourceType": "AWS::IAM::Policy",
+            "Timestamp": "2021-12-11T15:26:29.197000+00:00",
+            "ResourceStatus": "CREATE_COMPLETE",
+            "DriftInformation": {
+                "StackResourceDriftStatus": "NOT_CHECKED"
+            }
+        },
+        {
+            "StackName": "dsl",
+            "StackId": "arn:aws:cloudformation:eu-central-1:669453403305:stack/dsl/8af29270-5a96-11ec-b42d-063a265415c8",
+            "LogicalResourceId": "bucketoutput31FB9C92",
+            "PhysicalResourceId": "/goa-serverless/bucket",
+            "ResourceType": "AWS::SSM::Parameter",
+            "Timestamp": "2021-12-11T15:31:05.004000+00:00",
+            "ResourceStatus": "CREATE_COMPLETE",
+            "DriftInformation": {
+                "StackResourceDriftStatus": "NOT_CHECKED"
+            }
+        },
+        {
+            "StackName": "dsl",
+            "StackId": "arn:aws:cloudformation:eu-central-1:669453403305:stack/dsl/8af29270-5a96-11ec-b42d-063a265415c8",
+            "LogicalResourceId": "handleroutput9E079D71",
+            "PhysicalResourceId": "/goa-serverless/handler",
+            "ResourceType": "AWS::SSM::Parameter",
+            "Timestamp": "2021-12-11T15:27:01.978000+00:00",
+            "ResourceStatus": "CREATE_COMPLETE",
+            "DriftInformation": {
+                "StackResourceDriftStatus": "NOT_CHECKED"
+            }
+        },
+        {
+            "StackName": "dsl",
+            "StackId": "arn:aws:cloudformation:eu-central-1:669453403305:stack/dsl/8af29270-5a96-11ec-b42d-063a265415c8",
+            "LogicalResourceId": "incominggov27C7B0BAD",
+            "PhysicalResourceId": "dsl-incominggov27c7b0bad-9u4i3dj0czj3",
+            "ResourceType": "AWS::S3::Bucket",
+            "Timestamp": "2021-12-11T15:26:19.466000+00:00",
+            "ResourceStatus": "CREATE_COMPLETE",
+            "DriftInformation": {
+                "StackResourceDriftStatus": "NOT_CHECKED"
+            }
+        },
+        {
+            "StackName": "dsl",
+            "StackId": "arn:aws:cloudformation:eu-central-1:669453403305:stack/dsl/8af29270-5a96-11ec-b42d-063a265415c8",
+            "LogicalResourceId": "incominggov2AllowBucketNotificationsTodslmyHandler6B9CA70A5F68B5A5",
+            "PhysicalResourceId": "dsl-incominggov2AllowBucketNotificationsTodslmyHandler6B9CA70A5F68B5A5-15M0WAFD24TRI",
+            "ResourceType": "AWS::Lambda::Permission",
+            "Timestamp": "2021-12-11T15:27:10.033000+00:00",
+            "ResourceStatus": "CREATE_COMPLETE",
+            "DriftInformation": {
+                "StackResourceDriftStatus": "NOT_CHECKED"
+            }
+        },
+        {
+            "StackName": "dsl",
+            "StackId": "arn:aws:cloudformation:eu-central-1:669453403305:stack/dsl/8af29270-5a96-11ec-b42d-063a265415c8",
+            "LogicalResourceId": "incominggov2Notifications15308B78",
+            "PhysicalResourceId": "incominggov2Notifications15308B78",
+            "ResourceType": "Custom::S3BucketNotifications",
+            "Timestamp": "2021-12-11T15:27:15.372000+00:00",
+            "ResourceStatus": "CREATE_COMPLETE",
+            "DriftInformation": {
+                "StackResourceDriftStatus": "NOT_CHECKED"
+            }
+        },
+        {
+            "StackName": "dsl",
+            "StackId": "arn:aws:cloudformation:eu-central-1:669453403305:stack/dsl/8af29270-5a96-11ec-b42d-063a265415c8",
+            "LogicalResourceId": "items07D08F4B",
+            "PhysicalResourceId": "dsl-items07D08F4B-1IFC7UAK3PXFP",
+            "ResourceType": "AWS::DynamoDB::Table",
+            "Timestamp": "2021-12-11T15:26:28.641000+00:00",
+            "ResourceStatus": "CREATE_COMPLETE",
+            "DriftInformation": {
+                "StackResourceDriftStatus": "NOT_CHECKED"
+            }
+        },
+        {
+            "StackName": "dsl",
+            "StackId": "arn:aws:cloudformation:eu-central-1:669453403305:stack/dsl/8af29270-5a96-11ec-b42d-063a265415c8",
+            "LogicalResourceId": "myHandler0D56A5FA",
+            "PhysicalResourceId": "logincomingobject",
+            "ResourceType": "AWS::Lambda::Function",
+            "Timestamp": "2021-12-11T15:26:57.555000+00:00",
+            "ResourceStatus": "CREATE_COMPLETE",
+            "DriftInformation": {
+                "StackResourceDriftStatus": "NOT_CHECKED"
+            }
+        },
+        {
+            "StackName": "dsl",
+            "StackId": "arn:aws:cloudformation:eu-central-1:669453403305:stack/dsl/8af29270-5a96-11ec-b42d-063a265415c8",
+            "LogicalResourceId": "myHandlerLogRetention49AE21C5",
+            "PhysicalResourceId": "/aws/lambda/logincomingobject",
+            "ResourceType": "Custom::LogRetention",
+            "Timestamp": "2021-12-11T15:27:03.535000+00:00",
+            "ResourceStatus": "CREATE_COMPLETE",
+            "DriftInformation": {
+                "StackResourceDriftStatus": "NOT_CHECKED"
+            }
+        },
+        {
+            "StackName": "dsl",
+            "StackId": "arn:aws:cloudformation:eu-central-1:669453403305:stack/dsl/8af29270-5a96-11ec-b42d-063a265415c8",
+            "LogicalResourceId": "myHandlerServiceRole2E68728F",
+            "PhysicalResourceId": "dsl-myHandlerServiceRole2E68728F-1PJ4JUNR3TDEU",
+            "ResourceType": "AWS::IAM::Role",
+            "Timestamp": "2021-12-11T15:26:12.356000+00:00",
+            "ResourceStatus": "CREATE_COMPLETE",
+            "DriftInformation": {
+                "StackResourceDriftStatus": "NOT_CHECKED"
+            }
+        },
+        {
+            "StackName": "dsl",
+            "StackId": "arn:aws:cloudformation:eu-central-1:669453403305:stack/dsl/8af29270-5a96-11ec-b42d-063a265415c8",
+            "LogicalResourceId": "myHandlerServiceRoleDefaultPolicy44F4E63A",
+            "PhysicalResourceId": "dsl-myHand-97WVGR9SJ9BY",
+            "ResourceType": "AWS::IAM::Policy",
+            "Timestamp": "2021-12-11T15:26:45.095000+00:00",
+            "ResourceStatus": "CREATE_COMPLETE",
+            "DriftInformation": {
+                "StackResourceDriftStatus": "NOT_CHECKED"
+            }
+        },
+        {
+            "StackName": "dsl",
+            "StackId": "arn:aws:cloudformation:eu-central-1:669453403305:stack/dsl/8af29270-5a96-11ec-b42d-063a265415c8",
+            "LogicalResourceId": "tableoutput599AC338",
+            "PhysicalResourceId": "/goa-serverless/table",
+            "ResourceType": "AWS::SSM::Parameter",
+            "Timestamp": "2021-12-11T15:26:32.767000+00:00",
+            "ResourceStatus": "CREATE_COMPLETE",
+            "DriftInformation": {
+                "StackResourceDriftStatus": "NOT_CHECKED"
+            }
+        }
+    ]
+}

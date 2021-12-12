@@ -23,13 +23,14 @@ func PhysicalIDfromCID(client CloudFormationInterface, stack *string, constructI
 	resGetTemplate, err := client.GetTemplate(context.TODO(), parameterStack)
 	if err != nil {
 		log.Fatal("Template "+*stack+" not found")
-		return nil, err
+		return nil, errors.New("Template "+*stack+" not found")
 	}
-
+	
 	template := resGetTemplate.TemplateBody
 	// Find LogicalID
 	logicalID,err := LogicalIDfromCID(template, constructId)
 	if err != nil {
+		log.Fatal("LogicalIDfromCID error")
 		return nil, err
 	}
 	// get stackresources
@@ -63,7 +64,22 @@ func LogicalIDfromCID(stackContent *string, constructID *string) (*string, error
 			if resource.Metadata["aws:cdk:path"] != "" {
 				meta := resource.Metadata["aws:cdk:path"]
 				log.Debug("Path: ",meta)
-				templateConstructID := ExtractConstructID(&meta)
+				cdkPath := ""
+				switch meta.(type) {
+				case bool:
+					log.Info("A bool in metatdata - this should not happen (tm)")
+				case string:
+					cdkPath = meta.(string)
+				default:
+					log.Warn("Unkown Type")
+				}
+				log.Debug("Path: ",meta)
+				
+				templateConstructID := ""
+				if len(cdkPath) > 3 {
+					templateConstructID = ExtractConstructID(&cdkPath)
+				}
+
 				if templateConstructID == *constructID {
 						return &key, nil
 				}

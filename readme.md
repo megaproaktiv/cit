@@ -34,7 +34,7 @@ package main
 import (
 	"testing"
 	aws "github.com/aws/aws-sdk-go-v2/aws"
-	ec2 "github.com/megaproaktiv/cit/services/ec2"
+	ec2 "github.com/megaproaktiv/citec2"
 	"github.com/stretchr/testify/assert"
 )
 
