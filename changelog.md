@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 ### Added
 
+## [0.1.13]
+### Bugfix
+- Error json: cannot unmarshal bool into Go struct field Resource.Resources.Metadata of type string
+
 ## [0.1.12]
 ### Added
 - Lambda with mocked Cfn and lambda client
