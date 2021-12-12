@@ -4,7 +4,6 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
-	"io/ioutil"
 	"os"
 
 	"testing"
@@ -15,51 +14,72 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/lambda/types"
 	"github.com/megaproaktiv/cit"
 	"github.com/megaproaktiv/cit/citlambda"
-	"github.com/stretchr/testify/assert"
+	"gotest.tools/assert"
+
 )
+
+// func (gt *cloudformation.GetTemplateOutput) UnmarshalJSON(data []byte) (err error) {
+//     var result map[string]interface{}
+//     err = json.Unmarshal(data, &result)
+//     keys := reflect.ValueOf(result).MapKeys()
+//     for _, item := range keys {
+//         fmt.Print(item)
+// 		ii := item.Interface().(string)
+// 		gt.TemplateBody = &ii
+//     }
+//     return
+// }
 
 func TestGetFunctionConfiguration(t *testing.T) {
 	
 	mockedLambdaInterface := &citlambda.LambdaInterfaceMock{
 		GetFunctionFunc: func(ctx context.Context, params *lambda.GetFunctionInput, optFns ...func(*lambda.Options)) (*lambda.GetFunctionOutput, error) {
 			var output lambda.GetFunctionOutput
-			data, err := ioutil.ReadFile("testdata/get-function-positive.json")
+			data, err := os.ReadFile("testdata/get-function-positive.json")
 			if err != nil {
 				t.Error("Cant read input testdata")
 				t.Error(err)
 			}
-			json.Unmarshal(data, &output);
-			return &output,nil
+			json.Unmarshal(data, &output)
+			return &output, nil
+		},
+		InvokeFunc: func(ctx context.Context, params *lambda.InvokeInput, optFns ...func(*lambda.Options)) (*lambda.InvokeOutput, error) {
+			panic("Not implemented")
 		},
 	}
+	
 	
 	mockedCloudFormationInterface := &cit.CloudFormationInterfaceMock{
 		DescribeStackResourceFunc: func(ctx context.Context, 
 			params *cloudformation.DescribeStackResourceInput, 
 			optFns ...func(*cloudformation.Options)) (*cloudformation.DescribeStackResourceOutput, error) {
 				var output cloudformation.DescribeStackResourceOutput
-				data, err := ioutil.ReadFile("testdata/function-test-describe-stack-resource.json")
+				data, err := os.ReadFile("testdata/function-test-describe-stack-resource.json")
 				if err != nil {
 					t.Error("Cant read input testdata")
 					t.Error(err)
 				}
 				json.Unmarshal(data, &output);
 				return &output,nil
-		},
-		GetTemplateFunc: func(ctx context.Context, 
-			params *cloudformation.GetTemplateInput, 
-			optFns ...func(*cloudformation.Options)) (*cloudformation.GetTemplateOutput, error) {
-				var templateOutput cloudformation.GetTemplateOutput
-				
-				data, err := ioutil.ReadFile("testdata/function-test-template.json")
-				if err != nil {
-					fmt.Println("File reading error: ", err)
-				}
-				content := string(data)
-				templateOutput.TemplateBody = &content
-	
-				return &templateOutput, nil
 			},
+			GetTemplateFunc: func(ctx context.Context, 
+				params *cloudformation.GetTemplateInput, 
+				optFns ...func(*cloudformation.Options)) (*cloudformation.GetTemplateOutput, error) {
+				output := &cloudformation.GetTemplateOutput{}
+				preStage := &cit.SimpleCfn{}
+				data, err := os.ReadFile("testdata/get-template.json")
+				if err != nil {
+					t.Error("Cant read input testdata - template")
+					t.Error(err)
+				}
+				// dynamic := make(map[string]interface{})
+				// json.Unmarshal(data,&dynamic)
+
+				json.Unmarshal(data,&preStage)
+				fmt.Print()
+			
+				return output, nil
+		},
 	}
 
 	os.Setenv("AUTO_INIT", "false")
@@ -67,7 +87,7 @@ func TestGetFunctionConfiguration(t *testing.T) {
 	cit.SetClient(mockedCloudFormationInterface)
 	
 	got, err := citlambda.GetFunctionConfiguration(aws.String("LambdaSimpleStack"), aws.String("HelloHandler"))
-	assert.Nil(t, err, "GetFunction should return no error")
+	assert.NilError(t, err, "GetFunction should return no error")
 	expect := &types.FunctionConfiguration{
 		FunctionName:               aws.String("LambdaSimpleStack-HelloHandler2E4FBA4D-ZqznH9gomexC"),
 		Handler:                    aws.String("hello.handler"),

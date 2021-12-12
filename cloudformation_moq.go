@@ -15,22 +15,22 @@ var _ CloudFormationInterface = &CloudFormationInterfaceMock{}
 
 // CloudFormationInterfaceMock is a mock implementation of CloudFormationInterface.
 //
-// 	func TestSomethingThatUsesCloudFormationInterface(t *testing.T) {
+//     func TestSomethingThatUsesCloudFormationInterface(t *testing.T) {
 //
-// 		// make and configure a mocked CloudFormationInterface
-// 		mockedCloudFormationInterface := &CloudFormationInterfaceMock{
-// 			DescribeStackResourceFunc: func(ctx context.Context, params *cloudformation.DescribeStackResourceInput, optFns ...func(*cloudformation.Options)) (*cloudformation.DescribeStackResourceOutput, error) {
-// 				panic("mock out the DescribeStackResource method")
-// 			},
-// 			GetTemplateFunc: func(ctx context.Context, params *cloudformation.GetTemplateInput, optFns ...func(*cloudformation.Options)) (*cloudformation.GetTemplateOutput, error) {
-// 				panic("mock out the GetTemplate method")
-// 			},
-// 		}
+//         // make and configure a mocked CloudFormationInterface
+//         mockedCloudFormationInterface := &CloudFormationInterfaceMock{
+//             DescribeStackResourceFunc: func(ctx context.Context, params *cloudformation.DescribeStackResourceInput, optFns ...func(*cloudformation.Options)) (*cloudformation.DescribeStackResourceOutput, error) {
+// 	               panic("mock out the DescribeStackResource method")
+//             },
+//             GetTemplateFunc: func(ctx context.Context, params *cloudformation.GetTemplateInput, optFns ...func(*cloudformation.Options)) (*cloudformation.GetTemplateOutput, error) {
+// 	               panic("mock out the GetTemplate method")
+//             },
+//         }
 //
-// 		// use mockedCloudFormationInterface in code that requires CloudFormationInterface
-// 		// and then make assertions.
+//         // use mockedCloudFormationInterface in code that requires CloudFormationInterface
+//         // and then make assertions.
 //
-// 	}
+//     }
 type CloudFormationInterfaceMock struct {
 	// DescribeStackResourceFunc mocks the DescribeStackResource method.
 	DescribeStackResourceFunc func(ctx context.Context, params *cloudformation.DescribeStackResourceInput, optFns ...func(*cloudformation.Options)) (*cloudformation.DescribeStackResourceOutput, error)

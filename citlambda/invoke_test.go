@@ -17,7 +17,26 @@ import (
 )
 
 func TestInvokeFunction(t *testing.T) {
-	
+
+	mockedLambdaInterface := &citlambda.LambdaInterfaceMock{
+		GetFunctionFunc: func(ctx context.Context, params *lambda.GetFunctionInput, optFns ...func(*lambda.Options)) (*lambda.GetFunctionOutput, error) {
+			var output lambda.GetFunctionOutput
+			data, err := ioutil.ReadFile("testdata/invoke-test-get-function.json")
+			if err != nil {
+				t.Error("Cant read input testdata")
+				t.Error(err)
+			}
+			json.Unmarshal(data, &output);
+			return &output,nil
+		},
+		InvokeFunc: func(ctx context.Context, params *lambda.InvokeInput, optFns ...func(*lambda.Options)) (*lambda.InvokeOutput, error) {
+			var output lambda.InvokeOutput
+			output.Payload = []byte("done")
+			return &output,nil
+			
+		},
+	}
+
 	mockedCloudFormationInterface := &cit.CloudFormationInterfaceMock{
 		GetTemplateFunc: func(ctx context.Context, 
 			params *cloudformation.GetTemplateInput, 
@@ -48,7 +67,7 @@ func TestInvokeFunction(t *testing.T) {
 				return &output,nil
 		},
 	}
-	cit.SetClient(mockedCloudFormationInterface)
+	
 
 	mockedLambdaInterface := &citlambda.LambdaInterfaceMock{
 		GetFunctionFunc: func(ctx context.Context, params *lambda.GetFunctionInput, optFns ...func(*lambda.Options)) (*lambda.GetFunctionOutput, error) {
@@ -66,8 +85,6 @@ func TestInvokeFunction(t *testing.T) {
 			output.Payload = []byte("Done")
 			return &output,nil
 
-		},
-	}
 	os.Setenv("AUTO_INIT", "false")
 	citlambda.SetClient(mockedLambdaInterface)
 	eventFileName := "./testdata/invoke-test-event.json"
